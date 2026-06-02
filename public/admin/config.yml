@@ -5,4 +5,12 @@ backend:
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
-collections: []
+collections:
+  - name: "pages"
+    label: "Pages"
+    folder: "src/content/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Content", name: "body", widget: "markdown" }
