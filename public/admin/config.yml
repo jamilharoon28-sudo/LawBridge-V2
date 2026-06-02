@@ -76,3 +76,14 @@ collections:
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Role", name: "role", widget: "string", required: false }
       - { label: "Testimonial", name: "body", widget: "markdown" }
+
+  - name: "site_settings"
+    label: "Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "src/content/settings/general.md"
+        fields:
+          - { label: "Site Name", name: "siteName", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Contact Email", name: "contactEmail", widget: "string" }
