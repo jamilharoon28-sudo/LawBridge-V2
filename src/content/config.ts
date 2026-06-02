@@ -24,8 +24,17 @@ const webinars = defineCollection({
   })
 });
 
+const workshops = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    date: z.date()
+  })
+});
+
 export const collections = {
   pages,
   blog,
-  webinars
+  webinars,
+  workshops
 };
