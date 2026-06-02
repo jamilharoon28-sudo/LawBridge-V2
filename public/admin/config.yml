@@ -87,3 +87,14 @@ collections:
           - { label: "Site Name", name: "siteName", widget: "string" }
           - { label: "Tagline", name: "tagline", widget: "string" }
           - { label: "Contact Email", name: "contactEmail", widget: "string" }
+
+      - label: "Navigation"
+        name: "navigation"
+        file: "src/content/settings/navigation.md"
+        fields:
+          - label: "Navigation Links"
+            name: "links"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
