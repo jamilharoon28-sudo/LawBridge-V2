@@ -7,6 +7,14 @@ const pages = defineCollection({
   })
 });
 
+const blog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string()
+  })
+});
+
 export const collections = {
-  pages
+  pages,
+  blog
 };
