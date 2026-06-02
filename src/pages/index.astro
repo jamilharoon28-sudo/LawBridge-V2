@@ -4,8 +4,12 @@ import { getEntry } from "astro:content";
 
 const settings = await getEntry("settings", "general");
 
-const siteName = settings?.data.siteName || "LawBridge";
-const tagline = settings?.data.tagline || "";
+if (!settings) {
+  throw new Error("General settings not found.");
+}
+
+const siteName = settings.data.siteName;
+const tagline = settings.data.tagline;
 ---
 
 <BaseLayout title={siteName}>
