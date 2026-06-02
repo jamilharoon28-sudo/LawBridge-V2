@@ -1,10 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const mentors = await getCollection("mentors");
 ---
 
 <BaseLayout title="Mentors | LawBridge">
   <main>
     <h1>Mentors</h1>
-    <p>Connect with legal professionals, gain insights into the profession and receive guidance from experienced mentors.</p>
+
+    {mentors.map((mentor) => (
+      <article>
+        <h2>{mentor.data.name}</h2>
+        <p>{mentor.data.role}</p>
+        {mentor.data.organisation && <p>{mentor.data.organisation}</p>}
+      </article>
+    ))}
   </main>
 </BaseLayout>
