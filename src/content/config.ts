@@ -57,6 +57,15 @@ const testimonials = defineCollection({
   })
 });
 
+const settings = defineCollection({
+  type: "content",
+  schema: z.object({
+    siteName: z.string(),
+    tagline: z.string(),
+    contactEmail: z.string()
+  })
+});
+
 export const collections = {
   pages,
   blog,
@@ -64,5 +73,6 @@ export const collections = {
   workshops,
   resources,
   mentors,
-  testimonials
+  testimonials,
+  settings
 };
