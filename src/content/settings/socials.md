@@ -1,5 +1,5 @@
 ---
-linkedin: "https://linkedin.com"
-instagram: "https://instagram.com"
-youtube: "https://youtube.com"
+linkedin: "https://www.linkedin.com/company/lawbridge"
+instagram: "https://www.instagram.com/lawbridge"
+youtube: "https://www.youtube.com/@lawbridge"
 ---
