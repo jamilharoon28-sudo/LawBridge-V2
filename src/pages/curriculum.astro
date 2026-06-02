@@ -1,10 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getEntry } from "astro:content";
+
+const page = await getEntry("pages", "curriculum");
+const { Content } = await page.render();
 ---
 
-<BaseLayout title="Curriculum | LawBridge">
+<BaseLayout title={`${page.data.title} | LawBridge`}>
   <main>
-    <h1>Curriculum</h1>
-    <p>A structured legal development pathway covering legal knowledge, practical skills, career readiness and professional confidence.</p>
+    <h1>{page.data.title}</h1>
+    <Content />
   </main>
 </BaseLayout>
