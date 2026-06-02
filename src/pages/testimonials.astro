@@ -9,14 +9,18 @@ const testimonials = await getCollection("testimonials");
   <main>
     <h1>Testimonials</h1>
 
-    {testimonials.map((testimonial) => (
-      <article>
-        <blockquote>
-          <testimonial.render />
-        </blockquote>
-        <p>{testimonial.data.name}</p>
-        {testimonial.data.role && <p>{testimonial.data.role}</p>}
-      </article>
-    ))}
+    {testimonials.map(async (testimonial) => {
+      const { Content } = await testimonial.render();
+
+      return (
+        <article>
+          <blockquote>
+            <Content />
+          </blockquote>
+          <p>{testimonial.data.name}</p>
+          {testimonial.data.role && <p>{testimonial.data.role}</p>}
+        </article>
+      );
+    })}
   </main>
 </BaseLayout>
