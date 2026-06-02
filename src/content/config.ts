@@ -60,9 +60,15 @@ const testimonials = defineCollection({
 const settings = defineCollection({
   type: "content",
   schema: z.object({
-    siteName: z.string(),
-    tagline: z.string(),
-    contactEmail: z.string()
+    siteName: z.string().optional(),
+    tagline: z.string().optional(),
+    contactEmail: z.string().optional(),
+    links: z.array(
+      z.object({
+        label: z.string(),
+        url: z.string()
+      })
+    ).optional()
   })
 });
 
