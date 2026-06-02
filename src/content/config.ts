@@ -49,11 +49,20 @@ const mentors = defineCollection({
   })
 });
 
+const testimonials = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    role: z.string().optional()
+  })
+});
+
 export const collections = {
   pages,
   blog,
   webinars,
   workshops,
   resources,
-  mentors
+  mentors,
+  testimonials
 };
