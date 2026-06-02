@@ -1,10 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const resources = await getCollection("resources");
 ---
 
 <BaseLayout title="Resources | LawBridge">
   <main>
     <h1>Resources</h1>
-    <p>Guides, templates and practical materials to support legal learning, career planning and professional development.</p>
+
+    {resources.map((resource) => (
+      <article>
+        <h2>{resource.data.title}</h2>
+        <p>{resource.data.type}</p>
+        <a href={`/resources/${resource.slug}`}>View resource</a>
+      </article>
+    ))}
   </main>
 </BaseLayout>
