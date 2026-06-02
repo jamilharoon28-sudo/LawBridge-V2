@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const testimonials = await getCollection("testimonials");
+---
+
+<BaseLayout title="Testimonials | LawBridge">
+  <main>
+    <h1>Testimonials</h1>
+
+    {testimonials.map((testimonial) => (
+      <article>
+        <blockquote>
+          <testimonial.render />
+        </blockquote>
+        <p>{testimonial.data.name}</p>
+        {testimonial.data.role && <p>{testimonial.data.role}</p>}
+      </article>
+    ))}
+  </main>
+</BaseLayout>
