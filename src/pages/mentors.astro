@@ -1,13 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
+const page = await getEntry("pages", "mentors");
 const mentors = await getCollection("mentors");
+
+const { Content } = await page.render();
 ---
 
-<BaseLayout title="Mentors | LawBridge">
+<BaseLayout title={`${page.data.title} | LawBridge`}>
   <main>
-    <h1>Mentors</h1>
+    <h1>{page.data.title}</h1>
+
+    <Content />
 
     {mentors.map((mentor) => (
       <article>
