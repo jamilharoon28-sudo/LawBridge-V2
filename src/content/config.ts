@@ -64,6 +64,9 @@ const settings = defineCollection({
     tagline: z.string().optional(),
     contactEmail: z.string().optional(),
     copyright: z.string().optional(),
+    linkedin: z.string().optional(),
+    instagram: z.string().optional(),
+    youtube: z.string().optional(),
     links: z.array(
       z.object({
         label: z.string(),
