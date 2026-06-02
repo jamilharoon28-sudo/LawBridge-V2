@@ -32,9 +32,18 @@ const workshops = defineCollection({
   })
 });
 
+const resources = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    type: z.string()
+  })
+});
+
 export const collections = {
   pages,
   blog,
   webinars,
-  workshops
+  workshops,
+  resources
 };
