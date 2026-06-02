@@ -40,10 +40,20 @@ const resources = defineCollection({
   })
 });
 
+const mentors = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    role: z.string(),
+    organisation: z.string().optional()
+  })
+});
+
 export const collections = {
   pages,
   blog,
   webinars,
   workshops,
-  resources
+  resources,
+  mentors
 };
