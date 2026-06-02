@@ -1,10 +1,20 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const webinars = await getCollection("webinars");
 ---
 
 <BaseLayout title="Webinars | LawBridge">
   <main>
     <h1>Webinars</h1>
-    <p>Live and recorded legal education sessions covering career development, legal practice, SQE preparation and professional insight.</p>
+
+    {webinars.map((webinar) => (
+      <article>
+        <h2>{webinar.data.title}</h2>
+        <p>{webinar.data.date.toLocaleDateString()}</p>
+        <a href={`/webinars/${webinar.slug}`}>View webinar</a>
+      </article>
+    ))}
   </main>
 </BaseLayout>
