@@ -35,3 +35,13 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "workshops"
+    label: "Workshops"
+    folder: "src/content/workshops"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Content", name: "body", widget: "markdown" }
