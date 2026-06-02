@@ -10,7 +10,9 @@ const pages = defineCollection({
 const blog = defineCollection({
   type: "content",
   schema: z.object({
-    title: z.string()
+    title: z.string(),
+    date: z.date(),
+    excerpt: z.string()
   })
 });
 
