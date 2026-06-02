@@ -3,8 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection, getEntry } from "astro:content";
 
 const page = await getEntry("pages", "resources");
-const resources = await getCollection("resources");
 
+if (!page) {
+  throw new Error("Resources page content not found.");
+}
+
+const resources = await getCollection("resources");
 const { Content } = await page.render();
 ---
 
