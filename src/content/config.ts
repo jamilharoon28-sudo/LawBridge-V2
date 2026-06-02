@@ -63,6 +63,7 @@ const settings = defineCollection({
     siteName: z.string().optional(),
     tagline: z.string().optional(),
     contactEmail: z.string().optional(),
+    copyright: z.string().optional(),
     links: z.array(
       z.object({
         label: z.string(),
