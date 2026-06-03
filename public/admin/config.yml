@@ -13,18 +13,21 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+      - { label: "Heading", name: "heading", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "blog"
-    label: "Blog Posts"
+    label: "Blog"
     folder: "src/content/blog"
     create: true
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Date", name: "date", widget: "datetime", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "webinars"
     label: "Webinars"
@@ -33,8 +36,9 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Date", name: "date", widget: "datetime", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "workshops"
     label: "Workshops"
@@ -43,8 +47,9 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Content", name: "body", widget: "markdown" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Date", name: "date", widget: "datetime", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
 
   - name: "resources"
     label: "Resources"
@@ -53,62 +58,6 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Type", name: "type", widget: "string" }
-      - { label: "Content", name: "body", widget: "markdown" }
-
-  - name: "mentors"
-    label: "Mentor Profiles"
-    folder: "src/content/mentors"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Role", name: "role", widget: "string" }
-      - { label: "Organisation", name: "organisation", widget: "string", required: false }
-      - { label: "Bio", name: "body", widget: "markdown" }
-
-  - name: "testimonials"
-    label: "Testimonials"
-    folder: "src/content/testimonials"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Role", name: "role", widget: "string", required: false }
-      - { label: "Testimonial", name: "body", widget: "markdown" }
-
-  - name: "site_settings"
-    label: "Site Settings"
-    files:
-      - label: "General Settings"
-        name: "general"
-        file: "src/content/settings/general.md"
-        fields:
-          - { label: "Site Name", name: "siteName", widget: "string" }
-          - { label: "Tagline", name: "tagline", widget: "string" }
-          - { label: "Contact Email", name: "contactEmail", widget: "string" }
-
-      - label: "Navigation"
-        name: "navigation"
-        file: "src/content/settings/navigation.md"
-        fields:
-          - label: "Navigation Links"
-            name: "links"
-            widget: "list"
-            fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "URL", name: "url", widget: "string" }
-
-      - label: "Footer"
-        name: "footer"
-        file: "src/content/settings/footer.md"
-        fields:
-          - { label: "Copyright Text", name: "copyright", widget: "string" }
-
-      - label: "Social Links"
-        name: "socials"
-        file: "src/content/settings/socials.md"
-        fields:
-          - { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
-          - { label: "Instagram", name: "instagram", widget: "string", required: false }
-          - { label: "YouTube", name: "youtube", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Category", name: "category", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
