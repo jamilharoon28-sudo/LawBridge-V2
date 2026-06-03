@@ -15,8 +15,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
 
         <div class="actions">
-          <a class="btn primary" href="/students">Join as a Student</a>
-          <a class="btn ghost" href="/mentors">Become a Mentor</a>
+          <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
+          <a class="btn ghost" href="/contact?tab=mentor">Become a Mentor</a>
           <a class="btn ghost" href="/resources">Explore the Curriculum</a>
         </div>
 
@@ -77,7 +77,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <section class="section cream">
+  <section data-section="problem" class="section cream">
+    <span class="section-marker">01</span>
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">The problem</p>
@@ -89,7 +90,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
 
-      <div class="cards three">
+      <div class="grid g3">
         <article class="card">
           <span>01</span>
           <h3>Practice exposure</h3>
@@ -119,7 +120,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <section class="section navy overlap">
+  <section data-section="method" class="section navy overlap">
+    <span class="section-marker">02</span>
     <div class="container">
       <div class="section-head light-text">
         <p class="eyebrow">The LawBridge method</p>
@@ -140,7 +142,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <section class="section light">
+  <section data-section="curriculum" class="section light">
+    <span class="section-marker">03</span>
     <div class="container split">
       <div>
         <p class="eyebrow">Practical skills curriculum</p>
@@ -153,26 +156,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <a class="btn primary" href="/resources">View the Curriculum</a>
       </div>
 
-      <div class="cards two">
-        <article class="card">
+      <div class="grid g2">
+        <article class="curric">
           <span class="icon">01</span>
           <h3>Legal analysis</h3>
           <p>Break down legal problems and apply structured legal reasoning.</p>
         </article>
 
-        <article class="card">
+        <article class="curric">
           <span class="icon">02</span>
           <h3>Drafting</h3>
           <p>Develop clear, accurate and practical written legal communication.</p>
         </article>
 
-        <article class="card">
+        <article class="curric">
           <span class="icon">03</span>
           <h3>Commercial awareness</h3>
           <p>Understand clients, sectors, business pressure and market context.</p>
         </article>
 
-        <article class="card">
+        <article class="curric">
           <span class="icon">04</span>
           <h3>Professional confidence</h3>
           <p>Build confidence through practice, feedback and mentor guidance.</p>
@@ -181,7 +184,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <section class="section cream overlap">
+  <section data-section="pathways" class="section cream overlap">
+    <span class="section-marker">04</span>
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Choose your pathway</p>
@@ -192,7 +196,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
 
-      <div class="cards four">
+      <div class="grid g4">
         <article class="card">
           <span>S</span>
           <h3>For Students</h3>
@@ -200,7 +204,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             Build practical legal confidence through mentorship, resources,
             webinars and structured skills development.
           </p>
-          <a href="/students">Start as a student</a>
+          <a href="/contact?tab=student">Start as a student</a>
         </article>
 
         <article class="card">
@@ -220,7 +224,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             Share expertise through mentorship, webinars, workshops, content or
             practical feedback.
           </p>
-          <a href="/mentors">Become a mentor</a>
+          <a href="/contact?tab=mentor">Become a mentor</a>
         </article>
 
         <article class="card">
@@ -230,7 +234,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             Collaborate to support students, societies, universities, firms and
             legal teams.
           </p>
-          <a href="/contact">Partner with us</a>
+          <a href="/contact?tab=partner">Partner with us</a>
         </article>
       </div>
     </div>
@@ -239,13 +243,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="section navy">
     <div class="container cta-panel">
       <div>
-        <p class="eyebrow">Start building practical legal capability.</p>
-        <h2>Join LawBridge and move from legal knowledge to professional confidence.</h2>
+        <p class="eyebrow">Start your LawBridge journey</p>
+        <h2>Ready to build practical legal confidence?</h2>
+        <p>
+          Join LawBridge and start developing the skills, judgement and commercial
+          awareness needed for modern legal practice.
+        </p>
       </div>
 
       <div class="actions">
-        <a class="btn primary" href="/students">Join as a Student</a>
-        <a class="btn ghost" href="/mentors">Become a Mentor</a>
+        <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
+        <a class="btn ghost" href="/contact?tab=mentor">Become a Mentor</a>
       </div>
     </div>
   </section>
