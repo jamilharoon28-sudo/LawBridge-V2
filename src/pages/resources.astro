@@ -7,137 +7,109 @@ const data = page?.data;
 
 const hero = data?.hero ?? {};
 const sections = data?.sections ?? {};
-const cards = data?.cards ?? {};
 const buttons = data?.buttons ?? {};
 const dashboard = data?.dashboard ?? {};
+
+// List all resources here (student + tutor)
+const resources = [
+  // Student/Tutor resources
+  { code: "CI-01", skill: "Client Interviewing", scenario: "Failed Software Launch", difficulty: "Foundation to Guided Practice", student: "/resources/student/Client Interviewing - Failed Software Launch - Student Pack.docx", tutor: "/resources/tutor/Client Interviewing - Failed Software Launch - Tutor Guide.docx" },
+  { code: "CI-02", skill: "Client Interviewing", scenario: "Dismissal After Raising Concern", difficulty: "Foundation to Guided Practice", student: "/resources/student/Client Interviewing - Dismissal After Raising Concern - Student Pack.docx", tutor: "/resources/tutor/Client Interviewing - Dismissal After Raising Concern - Tutor Guide.docx" },
+  { code: "AN-01", skill: "Attendance Notes and Legal Analysis", scenario: "Cyberattack After Client Interview", difficulty: "Intermediate", student: "/resources/student/Attendance Notes and Legal Analysis - Cyberattack After Client Interview - Student Pack.docx", tutor: "/resources/tutor/Attendance Notes and Legal Analysis - Cyberattack After Client Interview - Tutor Guide.docx" },
+  { code: "AN-02", skill: "Attendance Notes and Legal Analysis", scenario: "Contract Dispute Missing Evidence", difficulty: "Foundation to Intermediate", student: "/resources/student/Attendance Notes and Legal Analysis - Contract Dispute Missing Evidence - Student Pack.docx", tutor: "/resources/tutor/Attendance Notes and Legal Analysis - Contract Dispute Missing Evidence - Tutor Guide.docx" },
+  { code: "LW-01", skill: "Legal Writing", scenario: "AI Tool Dispute Advice Email", difficulty: "Intermediate", student: "/resources/student/Legal Writing - AI Tool Dispute Advice Email - Student Pack.docx", tutor: "/resources/tutor/Legal Writing - AI Tool Dispute Advice Email - Tutor Guide.docx" },
+  { code: "LW-02", skill: "Legal Writing", scenario: "Service Failure Complaint Response", difficulty: "Foundation to Intermediate", student: "/resources/student/Legal Writing - Service Failure Complaint Response - Student Pack.docx", tutor: "/resources/tutor/Legal Writing - Service Failure Complaint Response - Tutor Guide.docx" },
+  { code: "LD-01", skill: "Legal Drafting", scenario: "Limitation of Liability Clause", difficulty: "Intermediate", student: "/resources/student/Legal Drafting - Limitation of Liability Clause - Student Pack.docx", tutor: "/resources/tutor/Legal Drafting - Limitation of Liability Clause - Tutor Guide.docx" },
+  { code: "LD-02", skill: "Legal Drafting", scenario: "AI Ownership Clause", difficulty: "Intermediate", student: "/resources/student/Legal Drafting - AI Ownership Clause - Student Pack.docx", tutor: "/resources/tutor/Legal Drafting - AI Ownership Clause - Tutor Guide.docx" },
+  { code: "AO-01", skill: "Advocacy and Oral Presentation", scenario: "Technology Payment Dispute", difficulty: "Intermediate", student: "/resources/student/Advocacy - Technology Payment Dispute - Student Pack.docx", tutor: "/resources/tutor/Advocacy - Technology Payment Dispute - Tutor Guide.docx" },
+  { code: "AO-02", skill: "Advocacy and Oral Presentation", scenario: "Business Interruption Insurance Dispute", difficulty: "Intermediate to Advanced", student: "/resources/student/Advocacy - Business Interruption Insurance Dispute - Student Pack.docx", tutor: "/resources/tutor/Advocacy - Business Interruption Insurance Dispute - Tutor Guide.docx" },
+  { code: "LR-01", skill: "Legal Research", scenario: "Data Breach Reporting Duties", difficulty: "Foundation to Intermediate", student: "/resources/student/Legal Research - Data Breach Reporting Duties - Student Pack.docx", tutor: "/resources/tutor/Legal Research - Data Breach Reporting Duties - Tutor Guide.docx" },
+  { code: "LR-02", skill: "Legal Research", scenario: "Digital Payments Market Entry", difficulty: "Intermediate", student: "/resources/student/Legal Research - Digital Payments Market Entry - Student Pack.docx", tutor: "/resources/tutor/Legal Research - Digital Payments Market Entry - Tutor Guide.docx" },
+  { code: "CMA-01", skill: "Case and Matter Analysis", scenario: "Tech Company Acquisition Red Flags", difficulty: "Intermediate to Advanced", student: "/resources/student/Case and Matter Analysis - Tech Company Acquisition Red Flags - Student Pack.docx", tutor: "/resources/tutor/Case and Matter Analysis - Tech Company Acquisition Red Flags - Tutor Guide.docx" },
+  { code: "CMA-02", skill: "Case and Matter Analysis", scenario: "Blockchain Payment Dispute", difficulty: "Intermediate to Advanced", student: "/resources/student/Case and Matter Analysis - Blockchain Payment Dispute - Student Pack.docx", tutor: "/resources/tutor/Case and Matter Analysis - Blockchain Payment Dispute - Tutor Guide.docx" }
+];
+
+const skills = [...new Set(resources.map((resource) => resource.skill))];
 ---
 
-<BaseLayout title={data?.title ?? "Resources | LawBridge"}>
+<BaseLayout title="Resources | LawBridge">
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <p class="eyebrow">{hero.eyebrow}</p>
-        <h1>{hero.heading}</h1>
-        <p class="hero-lead">{hero.description}</p>
-
-        <div class="hero-actions">
-          {hero.primaryButtonText && (
-            <a class="btn primary" href={hero.primaryButtonLink}>{hero.primaryButtonText}</a>
-          )}
-
-          {hero.secondaryButtonText && (
-            <a class="btn secondary" href={hero.secondaryButtonLink}>{hero.secondaryButtonText}</a>
-          )}
-
-          {hero.tertiaryButtonText && (
-            <a class="btn secondary" href={hero.tertiaryButtonLink}>{hero.tertiaryButtonText}</a>
-          )}
-        </div>
-      </div>
-
-      {dashboard.heading && (
-        <div class="dashboard-card">
-          <span class="pill">{dashboard.label}</span>
-          <h2>{dashboard.heading}</h2>
-          <p>{dashboard.description}</p>
-
-          <div class="dashboard-list">
-            {dashboard.items?.map((item) => (
-              <span>{item}</span>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  </section>
-
-  <section class="section cream">
-    <div class="container">
-      <p class="eyebrow">{sections.problem?.eyebrow}</p>
-      <h2>{sections.problem?.heading}</h2>
-      <p class="section-intro">{sections.problem?.description}</p>
-
-      <div class="grid g3">
-        {(cards.problem ?? []).map((card) => (
-          <article class="card">
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section light">
-    <div class="container">
-      <p class="eyebrow">{sections.method?.eyebrow}</p>
-      <h2>{sections.method?.heading}</h2>
-      <p class="section-intro">{sections.method?.description}</p>
-
-      <div class="grid g4">
-        {(cards.method ?? []).map((card) => (
-          <article class="card">
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section navy">
-    <div class="container">
-      <p class="eyebrow">{sections.curriculum?.eyebrow}</p>
-      <h2>{sections.curriculum?.heading}</h2>
-      <p class="section-intro">{sections.curriculum?.description}</p>
-
-      <div class="grid g4">
-        {(cards.curriculum ?? []).map((card) => (
-          <article class="curric">
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-          </article>
-        ))}
+        <p class="eyebrow">{hero.eyebrow ?? "Resources"}</p>
+        <h1>{hero.heading ?? "Practical legal skills resources."}</h1>
+        <p class="hero-lead">
+          {hero.description ?? "Download student packs and tutor guides for LawBridge practical legal skills simulations."}
+        </p>
       </div>
     </div>
   </section>
 
   <section class="section cream">
     <div class="container">
-      <p class="eyebrow">{sections.pathways?.eyebrow}</p>
-      <h2>{sections.pathways?.heading}</h2>
-      <p class="section-intro">{sections.pathways?.description}</p>
+      <div class="resource-controls">
+        <button class="resource-filter active" data-filter-type="all">All</button>
+        <button class="resource-filter" data-filter-type="student">Student Packs</button>
+        <button class="resource-filter" data-filter-type="tutor">Tutor Guides</button>
+        <select id="skillFilter" aria-label="Filter resources by skill">
+          <option value="all">All skills</option>
+          {skills.map((skill) => (
+            <option value={skill}>{skill}</option>
+          ))}
+        </select>
+      </div>
 
-      <div class="grid g2">
-        {(cards.pathways ?? []).map((card) => (
-          <article class="card">
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
+      <div class="resource-library">
+        {resources.map((res) => (
+          <article class="resource-card" data-skill={res.skill}>
+            <div>
+              <span class="resource-code">{res.code}</span>
+              <p class="eyebrow">{res.skill}</p>
+              <h3>{res.scenario}</h3>
+              <p>{res.difficulty}</p>
+            </div>
 
-            {card.buttonText && (
-              <a class="btn secondary" href={card.buttonLink}>{card.buttonText}</a>
-            )}
+            <div class="resource-downloads">
+              <a class="btn primary resource-download student-download" href={res.student} download>
+                Download Student Pack
+              </a>
+              <a class="btn secondary resource-download tutor-download" href={res.tutor} download>
+                Download Tutor Guide
+              </a>
+            </div>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section light">
-    <div class="container cta-panel">
-      <p class="eyebrow">{sections.cta?.eyebrow}</p>
-      <h2>{sections.cta?.heading}</h2>
-      <p>{sections.cta?.description}</p>
+  <script is:inline>
+    const filterButtons = document.querySelectorAll(".resource-filter");
+    const skillFilter = document.querySelector("#skillFilter");
+    const cards = document.querySelectorAll(".resource-card");
+    let currentType = "all";
 
-      <div class="hero-actions">
-        {buttons.cta?.primaryText && (
-          <a class="btn primary" href={buttons.cta.primaryLink}>{buttons.cta.primaryText}</a>
-        )}
+    function applyFilters() {
+      const currentSkill = skillFilter?.value || "all";
+      cards.forEach((card) => {
+        const matchesSkill = currentSkill === "all" || card.dataset.skill === currentSkill;
+        const studentButton = card.querySelector(".student-download");
+        const tutorButton = card.querySelector(".tutor-download");
+        if (studentButton) studentButton.style.display = currentType === "tutor" ? "none" : "inline-flex";
+        if (tutorButton) tutorButton.style.display = currentType === "student" ? "none" : "inline-flex";
+        card.style.display = matchesSkill ? "flex" : "none";
+      });
+    }
 
-        {buttons.cta?.secondaryText && (
-          <a class="btn secondary" href={buttons.cta.secondaryLink}>{buttons.cta.secondaryText}</a>
-        )}
-      </div>
-    </div>
-  </section>
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        button.classList.add("active");
+        currentType = button.dataset.filterType;
+        applyFilters();
+      });
+    });
+
+    skillFilter?.addEventListener("change", applyFilters);
+  </script>
 </BaseLayout>
