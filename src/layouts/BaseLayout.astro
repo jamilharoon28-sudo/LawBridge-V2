@@ -36,7 +36,7 @@ const {
           </span>
         </a>
 
-        <button class="menu" data-menu-btn aria-label="Open menu">
+        <button class="menu" data-menu-btn aria-label="Open menu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -44,7 +44,7 @@ const {
 
         <nav class="nav" data-nav aria-label="Main navigation">
           <a href="/">Home</a>
-          <a href="/resources">Curriculum</a>
+          <a href="/about">About</a>
           <a href="/students">Students</a>
           <a href="/mentors">Mentors</a>
           <a href="/workshops">Workshops</a>
@@ -88,7 +88,7 @@ const {
 
         <div>
           <h3>Platform</h3>
-          <a href="/resources">Curriculum</a>
+          <a href="/about">About</a>
           <a href="/students">Students</a>
           <a href="/workshops">Workshops</a>
           <a href="/resources">Resources</a>
@@ -128,7 +128,15 @@ const {
 
       if (menuButton && nav) {
         menuButton.addEventListener("click", () => {
-          nav.classList.toggle("open");
+          const isOpen = nav.classList.toggle("open");
+          menuButton.setAttribute("aria-expanded", isOpen.toString());
+        });
+
+        nav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            nav.classList.remove("open");
+            menuButton.setAttribute("aria-expanded", "false");
+          });
         });
       }
 
