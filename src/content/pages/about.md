@@ -3,7 +3,7 @@ title: About | LawBridge
 hero:
   eyebrow: About LawBridge
   heading: Making practical legal development more accessible.
-  description: Haroon helps aspiring lawyers move beyond academic knowledge by
+  description: LawBridge helps aspiring lawyers move beyond academic knowledge by
     building practical skills, commercial awareness and professional confidence.
 sections:
   problem:
