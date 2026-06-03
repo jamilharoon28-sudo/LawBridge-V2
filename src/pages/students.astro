@@ -1,197 +1,132 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 
-const pages = await getCollection("pages");
-const studentsPage = pages.find((page) => page.slug === "students");
+const page = await getEntry("pages", "students");
+const data = page?.data;
 
-const title = studentsPage?.data.title ?? "Students | LawBridge";
-const eyebrow = studentsPage?.data.eyebrow ?? "Students";
-const heading =
-  studentsPage?.data.heading ??
-  "Build the practical legal confidence your studies alone may not provide.";
-const description =
-  studentsPage?.data.description ??
-  "LawBridge helps aspiring lawyers gain practical exposure, commercial awareness, mentor guidance and structured skills development.";
+const hero = data?.hero ?? {};
+const sections = data?.sections ?? {};
+const cards = data?.cards ?? {};
+const buttons = data?.buttons ?? {};
 ---
 
-<BaseLayout title={title}>
-  <section class="page-hero">
-    <div class="container page-grid">
+<BaseLayout title={data?.title ?? "Students | LawBridge"}>
+  <section class="hero">
+    <div class="container hero-grid">
       <div>
-        <p class="eyebrow">{eyebrow}</p>
-        <h1>{heading}</h1>
-        <p>{description}</p>
-
-        <div class="actions">
-          <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
-          <a class="btn ghost" href="/resources">View Curriculum</a>
-        </div>
+        <p class="eyebrow">{hero.eyebrow}</p>
+        <h1>{hero.heading}</h1>
+        <p class="hero-lead">{hero.description}</p>
       </div>
 
-      <div class="dashboard mini">
-        <div class="dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <div class="dashboard-card">
+        <span class="pill">Student Pathway</span>
+        <h2>Build practical confidence</h2>
+        <p>Access structured support for legal skills, commercial awareness and career readiness.</p>
 
-        <div class="mini-card">
-          <strong>Learn</strong>
-          <span>Structured resources and explanations.</span>
-        </div>
-
-        <div class="mini-card">
-          <strong>Practise</strong>
-          <span>Exercises, skills labs and scenarios.</span>
-        </div>
-
-        <div class="mini-card">
-          <strong>Grow</strong>
-          <span>Mentor guidance and portfolio evidence.</span>
+        <div class="dashboard-list">
+          <span>Practical workshops</span>
+          <span>Career webinars</span>
+          <span>Mentor guidance</span>
+          <span>Resources and templates</span>
         </div>
       </div>
     </div>
   </section>
 
   <section class="section cream">
-    <div class="container split">
-      <div>
-        <p class="eyebrow">Who this is for</p>
-        <h2>Designed for different stages of the legal journey.</h2>
-        <p>
-          LawBridge supports students, graduates, SQE candidates, career switchers
-          and early-stage future lawyers who want to move beyond theory.
-        </p>
-      </div>
+    <div class="container">
+      <p class="eyebrow">{sections.problem?.eyebrow}</p>
+      <h2>{sections.problem?.heading}</h2>
+      <p class="section-intro">{sections.problem?.description}</p>
 
-      <div class="tags">
-        <span>Law students</span>
-        <span>Recent graduates</span>
-        <span>SQE candidates</span>
-        <span>Career switchers</span>
-        <span>A-Level students</span>
-        <span>Junior lawyers</span>
+      <div class="grid g3">
+        {(cards.problem ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="section light overlap">
+  <section class="section light">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">What you will gain</p>
-        <h2>Move from understanding the law to applying it.</h2>
-        <p>
-          The student journey should feel clear, practical and useful from the
-          first interaction.
-        </p>
-      </div>
+      <p class="eyebrow">{sections.method?.eyebrow}</p>
+      <h2>{sections.method?.heading}</h2>
+      <p class="section-intro">{sections.method?.description}</p>
 
       <div class="grid g4">
-        <article class="card">
-          <span>01</span>
-          <h3>Practical legal skills</h3>
-          <p>Drafting, research, analysis, negotiation and communication.</p>
-        </article>
-
-        <article class="card">
-          <span>02</span>
-          <h3>Commercial awareness</h3>
-          <p>Understand client priorities and business context.</p>
-        </article>
-
-        <article class="card">
-          <span>03</span>
-          <h3>Professional exposure</h3>
-          <p>Learn from mentors, webinars and practical perspectives.</p>
-        </article>
-
-        <article class="card">
-          <span>04</span>
-          <h3>Portfolio evidence</h3>
-          <p>Prepare to evidence learning through exercises and reflection.</p>
-        </article>
+        {(cards.method ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="section navy">
     <div class="container">
-      <div class="section-head light-text">
-        <p class="eyebrow">Your LawBridge journey</p>
-        <h2>A development path from discovery to confidence.</h2>
-        <p>
-          This journey can later become the structure for dashboards and learning
-          paths.
-        </p>
-      </div>
+      <p class="eyebrow">{sections.curriculum?.eyebrow}</p>
+      <h2>{sections.curriculum?.heading}</h2>
+      <p class="section-intro">{sections.curriculum?.description}</p>
 
-      <div class="pathways">
-        <div class="path-card">
-          <span class="num">01</span>
-          <div>
-            <h3>Discover</h3>
-            <p>Learn what practical legal capability looks like.</p>
-          </div>
-        </div>
-
-        <div class="path-card">
-          <span class="num">02</span>
-          <div>
-            <h3>Learn</h3>
-            <p>Access resources, webinars and structured explanations.</p>
-          </div>
-        </div>
-
-        <div class="path-card">
-          <span class="num">03</span>
-          <div>
-            <h3>Practise</h3>
-            <p>Complete exercises and attend workshops.</p>
-          </div>
-        </div>
-
-        <div class="path-card">
-          <span class="num">04</span>
-          <div>
-            <h3>Receive Feedback</h3>
-            <p>Learn from mentors and professionals.</p>
-          </div>
-        </div>
-
-        <div class="path-card">
-          <span class="num">05</span>
-          <div>
-            <h3>Develop Confidence</h3>
-            <p>Build commercial awareness and judgement.</p>
-          </div>
-        </div>
-
-        <div class="path-card">
-          <span class="num">06</span>
-          <div>
-            <h3>Progress</h3>
-            <p>Use your experience to support applications and interviews.</p>
-          </div>
-        </div>
+      <div class="grid g4">
+        {(cards.curriculum ?? []).map((card) => (
+          <article class="curric">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="section cream">
     <div class="container">
-      <div class="section-head center">
-        <p class="eyebrow">Start your LawBridge journey</p>
-        <h2>Start building practical legal confidence.</h2>
-        <p>
-          Join LawBridge and begin developing the skills, judgement and awareness
-          needed for modern legal practice.
-        </p>
+      <p class="eyebrow">{sections.pathways?.eyebrow}</p>
+      <h2>{sections.pathways?.heading}</h2>
+      <p class="section-intro">{sections.pathways?.description}</p>
 
-        <div class="actions" style="justify-content:center">
-          <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
-          <a class="btn secondary" href="/resources">View Curriculum</a>
-        </div>
+      <div class="grid g2">
+        {(cards.pathways ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+
+            {card.buttonText && (
+              <a class="btn secondary" href={card.buttonLink}>
+                {card.buttonText}
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container cta-panel">
+      <p class="eyebrow">{sections.cta?.eyebrow}</p>
+      <h2>{sections.cta?.heading}</h2>
+      <p>{sections.cta?.description}</p>
+
+      <div class="hero-actions">
+        {buttons.cta?.primaryText && (
+          <a class="btn primary" href={buttons.cta.primaryLink}>
+            {buttons.cta.primaryText}
+          </a>
+        )}
+
+        {buttons.cta?.secondaryText && (
+          <a class="btn secondary" href={buttons.cta.secondaryLink}>
+            {buttons.cta.secondaryText}
+          </a>
+        )}
       </div>
     </div>
   </section>
