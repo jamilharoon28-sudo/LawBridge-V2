@@ -9,6 +9,7 @@ const hero = data?.hero ?? {};
 const sections = data?.sections ?? {};
 const cards = data?.cards ?? {};
 const buttons = data?.buttons ?? {};
+const dashboard = data?.dashboard ?? {};
 ---
 
 <BaseLayout title={data?.title ?? "Resources | LawBridge"}>
@@ -18,20 +19,35 @@ const buttons = data?.buttons ?? {};
         <p class="eyebrow">{hero.eyebrow}</p>
         <h1>{hero.heading}</h1>
         <p class="hero-lead">{hero.description}</p>
-      </div>
 
-      <div class="dashboard-card">
-        <span class="pill">Resource Hub</span>
-        <h2>Practical legal resources</h2>
-        <p>Guides, templates and learning materials to support legal career development.</p>
+        <div class="hero-actions">
+          {hero.primaryButtonText && (
+            <a class="btn primary" href={hero.primaryButtonLink}>{hero.primaryButtonText}</a>
+          )}
 
-        <div class="dashboard-list">
-          <span>Career guidance</span>
-          <span>Commercial awareness</span>
-          <span>Legal skills</span>
-          <span>SQE and QWE support</span>
+          {hero.secondaryButtonText && (
+            <a class="btn secondary" href={hero.secondaryButtonLink}>{hero.secondaryButtonText}</a>
+          )}
+
+          {hero.tertiaryButtonText && (
+            <a class="btn secondary" href={hero.tertiaryButtonLink}>{hero.tertiaryButtonText}</a>
+          )}
         </div>
       </div>
+
+      {dashboard.heading && (
+        <div class="dashboard-card">
+          <span class="pill">{dashboard.label}</span>
+          <h2>{dashboard.heading}</h2>
+          <p>{dashboard.description}</p>
+
+          <div class="dashboard-list">
+            {dashboard.items?.map((item) => (
+              <span>{item}</span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   </section>
 
@@ -99,9 +115,7 @@ const buttons = data?.buttons ?? {};
             <p>{card.description}</p>
 
             {card.buttonText && (
-              <a class="btn secondary" href={card.buttonLink}>
-                {card.buttonText}
-              </a>
+              <a class="btn secondary" href={card.buttonLink}>{card.buttonText}</a>
             )}
           </article>
         ))}
@@ -117,15 +131,11 @@ const buttons = data?.buttons ?? {};
 
       <div class="hero-actions">
         {buttons.cta?.primaryText && (
-          <a class="btn primary" href={buttons.cta.primaryLink}>
-            {buttons.cta.primaryText}
-          </a>
+          <a class="btn primary" href={buttons.cta.primaryLink}>{buttons.cta.primaryText}</a>
         )}
 
         {buttons.cta?.secondaryText && (
-          <a class="btn secondary" href={buttons.cta.secondaryLink}>
-            {buttons.cta.secondaryText}
-          </a>
+          <a class="btn secondary" href={buttons.cta.secondaryLink}>{buttons.cta.secondaryText}</a>
         )}
       </div>
     </div>
