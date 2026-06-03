@@ -1,1 +1,136 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { Astro } from "astro";
 
+const pageId = Astro.params.page;
+
+// Mock CMS data (replace with real data source)
+const cmsData = {
+  homepage: {
+    hero: { heading: "Welcome to LawBridge", description: "Practical legal skills for students and graduates" },
+    sections: ["Section 1 content", "Section 2 content"],
+    buttons: ["Sign Up", "Learn More"],
+    dashboard: "Dashboard text"
+  },
+  about: {
+    heading: "About LawBridge",
+    description: "We connect students with mentors",
+    team: ["Jane Doe", "John Smith"],
+    values: ["Professionalism", "Excellence", "Practicality"]
+  },
+  students: { hero: "Students Hero", curriculum: ["Module 1", "Module 2"], resources: ["Resource 1", "Resource 2"] },
+  mentors: { hero: "Mentors Hero", mentorshipProgram: "Program description", testimonials: ["Testimonial 1"] },
+  resources: { hero: "Resources Hero", filters: ["Skill 1", "Skill 2"], downloads: ["Resource Pack 1"] },
+  blog: { posts: ["Post 1", "Post 2"], featured: ["Featured 1"], categories: ["Category 1"] },
+  workshops: { upcoming: ["Workshop 1"], past: ["Workshop 2"], details: "Workshop details" },
+  webinars: { upcoming: ["Webinar 1"], past: ["Webinar 2"], speakers: ["Speaker 1"] }
+};
+
+const editablePage = cmsData[pageId] ?? {};
+---
+
+<BaseLayout title={`Edit ${pageId} | LawBridge Admin`}>
+  <section class="section cream">
+    <div class="container">
+      <h1>Edit {pageId}</h1>
+      <p>Update all editable fields for the <strong>{pageId}</strong> page.</p>
+
+      <form id="editPageForm">
+        {Object.entries(editablePage).map(([key, value]) => (
+          <div class="form-group">
+            <label for={key}>{key}</label>
+            {Array.isArray(value) ? (
+              <textarea id={key} name={key} rows={value.length + 1}>{value.join("\n")}</textarea>
+            ) : (
+              <input id={key} name={key} type="text" value={value} />
+            )}
+          </div>
+        ))}
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Save Changes</button>
+          <a href="/admin" class="btn secondary">Back to Admin</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script is:inline>
+    const form = document.querySelector("#editPageForm");
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      console.log("Updated page data:", data);
+      alert("Page updated! (Currently mock — integrate real backend to save changes)");
+    });
+  </script>
+
+  <style is:inline>
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: #041b32;
+    }
+
+    input[type="text"],
+    textarea {
+      border-radius: 12px;
+      border: 1px solid rgba(201, 150, 82, 0.28);
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      width: 100%;
+      resize: vertical;
+      transition: all 0.25s ease;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: rgba(201, 150, 82, 0.72);
+      box-shadow: 0 0 0 4px rgba(201, 150, 82, 0.16);
+      outline: none;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-actions .btn {
+      padding: 0.85rem 1.2rem;
+      font-weight: 800;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .form-actions .btn.primary {
+      background: linear-gradient(135deg, #e7b65f, #c99652);
+      color: #041b32;
+      border: none;
+    }
+
+    .form-actions .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 34px rgba(201, 150, 82, 0.28);
+    }
+
+    .form-actions .btn.secondary {
+      background: #ffffff;
+      border: 1px solid rgba(201, 150, 82, 0.28);
+      color: #041b32;
+    }
+
+    .form-actions .btn.secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(4, 27, 50, 0.12);
+    }
+  </style>
+</BaseLayout>
