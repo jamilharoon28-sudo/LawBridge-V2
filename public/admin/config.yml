@@ -9,14 +9,122 @@ collections:
   - name: "pages"
     label: "Pages"
     folder: "src/content/pages"
-    create: true
+    create: false
     slug: "{{slug}}"
+
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-      - { label: "Heading", name: "heading", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Body", name: "body", widget: "markdown", required: false }
+
+      - label: "Hero"
+        name: "hero"
+        widget: "object"
+        fields:
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+          - { label: "Heading", name: "heading", widget: "string", required: false }
+          - { label: "Description", name: "description", widget: "text", required: false }
+
+          - { label: "Primary Button Text", name: "primaryButtonText", widget: "string", required: false }
+          - { label: "Primary Button Link", name: "primaryButtonLink", widget: "string", required: false }
+
+          - { label: "Secondary Button Text", name: "secondaryButtonText", widget: "string", required: false }
+          - { label: "Secondary Button Link", name: "secondaryButtonLink", widget: "string", required: false }
+
+          - { label: "Tertiary Button Text", name: "tertiaryButtonText", widget: "string", required: false }
+          - { label: "Tertiary Button Link", name: "tertiaryButtonLink", widget: "string", required: false }
+
+      - label: "Sections"
+        name: "sections"
+        widget: "object"
+        required: false
+        fields:
+          - label: "Problem Section"
+            name: "problem"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+
+          - label: "Method Section"
+            name: "method"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+
+          - label: "Curriculum Section"
+            name: "curriculum"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+
+          - label: "Pathways Section"
+            name: "pathways"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+
+          - label: "CTA Section"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+
+      - label: "Cards"
+        name: "cards"
+        widget: "object"
+        required: false
+        fields:
+          - label: "Problem Cards"
+            name: "problem"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+          - label: "Method Cards"
+            name: "method"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+          - label: "Curriculum Cards"
+            name: "curriculum"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+          - label: "Pathway Cards"
+            name: "pathways"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Button Text", name: "buttonText", widget: "string", required: false }
+              - { label: "Button Link", name: "buttonLink", widget: "string", required: false }
+
+      - label: "CTA Buttons"
+        name: "buttons"
+        widget: "object"
+        required: false
+        fields:
+          - label: "CTA"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Primary Text", name: "primaryText", widget: "string", required: false }
+              - { label: "Primary Link", name: "primaryLink", widget: "string", required: false }
+              - { label: "Secondary Text", name: "secondaryText", widget: "string", required: false }
+              - { label: "Secondary Link", name: "secondaryLink", widget: "string", required: false }
 
   - name: "blog"
     label: "Blog"
@@ -27,7 +135,9 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text", required: false }
       - { label: "Date", name: "date", widget: "datetime", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Category", name: "category", widget: "string", required: false }
+      - { label: "Author", name: "author", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "webinars"
     label: "Webinars"
@@ -38,7 +148,8 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text", required: false }
       - { label: "Date", name: "date", widget: "datetime", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Status", name: "status", widget: "string", required: false }
+      - { label: "Location", name: "location", widget: "string", required: false }
 
   - name: "workshops"
     label: "Workshops"
@@ -49,7 +160,8 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text", required: false }
       - { label: "Date", name: "date", widget: "datetime", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Status", name: "status", widget: "string", required: false }
+      - { label: "Location", name: "location", widget: "string", required: false }
 
   - name: "resources"
     label: "Resources"
@@ -60,4 +172,4 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text", required: false }
       - { label: "Category", name: "category", widget: "string", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Type", name: "type", widget: "string", required: false }
