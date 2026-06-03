@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getEntry } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
 const page = await getEntry("pages", "blog");
 const data = page?.data;
@@ -10,6 +10,14 @@ const sections = data?.sections ?? {};
 const cards = data?.cards ?? {};
 const buttons = data?.buttons ?? {};
 const dashboard = data?.dashboard ?? {};
+
+const posts = await getCollection("blog");
+
+const sortedPosts = posts.sort((a, b) => {
+  const aTime = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const bTime = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return bTime - aTime;
+});
 ---
 
 <BaseLayout title={data?.title ?? "Blog | LawBridge"}>
@@ -70,18 +78,38 @@ const dashboard = data?.dashboard ?? {};
 
   <section class="section light">
     <div class="container">
-      <p class="eyebrow">{sections.method?.eyebrow}</p>
-      <h2>{sections.method?.heading}</h2>
-      <p class="section-intro">{sections.method?.description}</p>
+      <p class="eyebrow">Latest articles</p>
+      <h2>Read practical LawBridge insights.</h2>
+      <p class="section-intro">
+        Articles added in /admin will appear here automatically.
+      </p>
 
-      <div class="grid g4">
-        {(cards.method ?? []).map((card) => (
-          <article class="card">
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-          </article>
-        ))}
-      </div>
+      {sortedPosts.length > 0 ? (
+        <div class="grid g3">
+          {sortedPosts.map((post) => (
+            <article class="card">
+              {post.data.category && <p class="eyebrow">{post.data.category}</p>}
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+
+              {post.data.date && (
+                <p>
+                  {new Date(post.data.date).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
+              )}
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="card">
+          <h3>No blog posts yet</h3>
+          <p>Add blog posts in /admin and they will appear here automatically.</p>
+        </div>
+      )}
     </div>
   </section>
 
