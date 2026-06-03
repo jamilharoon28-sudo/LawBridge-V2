@@ -1258,3 +1258,39 @@ h3 {
   height: auto;
   margin-bottom: 18px;
 }
+.header .brand {
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  height: 72px;
+  display: flex;
+  align-items: center;
+}
+
+.header .brand-logo {
+  width: 150px;
+  height: auto;
+  max-height: 64px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+
+.footer .brand {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.footer .brand-logo {
+  width: 180px;
+  height: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+@media (max-width: 680px) {
+  .header .brand-logo {
+    width: 120px;
+    max-height: 52px;
+  }
+}
