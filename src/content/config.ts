@@ -4,6 +4,7 @@ const pages = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
+
     eyebrow: z.string().optional(),
     heading: z.string().optional(),
     description: z.string().optional(),
@@ -19,6 +20,15 @@ const pages = defineCollection({
         secondaryButtonLink: z.string().optional(),
         tertiaryButtonText: z.string().optional(),
         tertiaryButtonLink: z.string().optional(),
+      })
+      .optional(),
+
+    dashboard: z
+      .object({
+        label: z.string().optional(),
+        heading: z.string().optional(),
+        description: z.string().optional(),
+        items: z.array(z.string()).optional(),
       })
       .optional(),
 
