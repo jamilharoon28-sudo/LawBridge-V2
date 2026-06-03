@@ -2,85 +2,151 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getEntry } from "astro:content";
 
-const homePage = await getEntry("pages", "home");
+const home = await getEntry("pages", "home");
+const data = home?.data;
 
-const title = homePage?.data.title ?? "LawBridge | Practical Legal Development";
-const eyebrow =
-  homePage?.data.eyebrow ?? "Practical legal development for the SQE, QWE and AI era";
-const heading =
-  homePage?.data.heading ?? "Bridge the gap between legal education and real-world legal practice.";
-const description =
-  homePage?.data.description ??
-  "LawBridge helps aspiring lawyers build practical legal capability through structured learning, real-world exercises, mentor guidance, workshops, webinars and commercial awareness training.";
+const hero = data?.hero ?? {};
+const sections = data?.sections ?? {};
+const cards = data?.cards ?? {};
+const buttons = data?.buttons ?? {};
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={data?.title ?? "LawBridge | Practical Legal Development"}>
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <p class="eyebrow">{eyebrow}</p>
-        <h1>{heading}</h1>
-        <p>{description}</p>
+        <p class="eyebrow">{hero.eyebrow}</p>
+        <h1>{hero.heading}</h1>
+        <p class="hero-lead">{hero.description}</p>
 
-        <div class="actions">
-          <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
-          <a class="btn ghost" href="/contact?tab=mentor">Become a Mentor</a>
-          <a class="btn ghost" href="/resources">Explore the Curriculum</a>
-        </div>
+        <div class="hero-actions">
+          {hero.primaryButtonText && (
+            <a class="btn primary" href={hero.primaryButtonLink}>
+              {hero.primaryButtonText}
+            </a>
+          )}
 
-        <div class="hero-links">
-          <a href="/resources">Explore Resources</a>
-          <a href="/blog">Read the Blog</a>
+          {hero.secondaryButtonText && (
+            <a class="btn secondary" href={hero.secondaryButtonLink}>
+              {hero.secondaryButtonText}
+            </a>
+          )}
+
+          {hero.tertiaryButtonText && (
+            <a class="btn ghost" href={hero.tertiaryButtonLink}>
+              {hero.tertiaryButtonText}
+            </a>
+          )}
         </div>
       </div>
 
-      <div class="dashboard">
-        <div class="dots">
-          <span></span>
-          <span></span>
-          <span></span>
+      <div class="dashboard-card">
+        <span class="pill">LawBridge Platform</span>
+        <h2>Practical legal development</h2>
+        <p>Workshops, webinars, mentoring and resources designed to support aspiring lawyers.</p>
+
+        <div class="dashboard-list">
+          <span>SQE readiness</span>
+          <span>QWE preparation</span>
+          <span>Commercial awareness</span>
+          <span>AI-era legal skills</span>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="dash-top">
-          <div>
-            <span class="pill">LawBridge Skills Pathway</span>
-            <strong>Build practical legal capability</strong>
-          </div>
-          <span class="pill">Launch</span>
-        </div>
+  <section class="section cream">
+    <div class="container">
+      <p class="eyebrow">{sections.problem?.eyebrow}</p>
+      <h2>{sections.problem?.heading}</h2>
+      <p class="section-intro">{sections.problem?.description}</p>
 
-        <div class="skill-list">
-          <div class="skill-row">
-            <div class="skill-top">
-              <strong>Legal analysis</strong>
-              <small>86%</small>
-            </div>
-            <div class="bar"><span style="width:86%"></span></div>
-          </div>
+      <div class="grid g3">
+        {(cards.problem ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-          <div class="skill-row">
-            <div class="skill-top">
-              <strong>Commercial awareness</strong>
-              <small>78%</small>
-            </div>
-            <div class="bar"><span style="width:78%"></span></div>
-          </div>
+  <section class="section light">
+    <div class="container">
+      <p class="eyebrow">{sections.method?.eyebrow}</p>
+      <h2>{sections.method?.heading}</h2>
+      <p class="section-intro">{sections.method?.description}</p>
 
-          <div class="skill-row">
-            <div class="skill-top">
-              <strong>Professional confidence</strong>
-              <small>92%</small>
-            </div>
-            <div class="bar"><span style="width:92%"></span></div>
-          </div>
-        </div>
+      <div class="grid g4">
+        {(cards.method ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-        <div class="dash-bottom">
-          <p>
-            Legal knowledge matters. Confidence, judgement, drafting ability,
-            client awareness and commercial thinking are built through practice.
-          </p>
-        </div>
+  <section class="section navy">
+    <div class="container">
+      <p class="eyebrow">{sections.curriculum?.eyebrow}</p>
+      <h2>{sections.curriculum?.heading}</h2>
+      <p class="section-intro">{sections.curriculum?.description}</p>
+
+      <div class="grid g4">
+        {(cards.curriculum ?? []).map((card) => (
+          <article class="curric">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream">
+    <div class="container">
+      <p class="eyebrow">{sections.pathways?.eyebrow}</p>
+      <h2>{sections.pathways?.heading}</h2>
+      <p class="section-intro">{sections.pathways?.description}</p>
+
+      <div class="grid g2">
+        {(cards.pathways ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+
+            {card.buttonText && (
+              <a class="btn secondary" href={card.buttonLink}>
+                {card.buttonText}
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container cta-panel">
+      <p class="eyebrow">{sections.cta?.eyebrow}</p>
+      <h2>{sections.cta?.heading}</h2>
+      <p>{sections.cta?.description}</p>
+
+      <div class="hero-actions">
+        {buttons.cta?.primaryText && (
+          <a class="btn primary" href={buttons.cta.primaryLink}>
+            {buttons.cta.primaryText}
+          </a>
+        )}
+
+        {buttons.cta?.secondaryText && (
+          <a class="btn secondary" href={buttons.cta.secondaryLink}>
+            {buttons.cta.secondaryText}
+          </a>
+        )}
       </div>
     </div>
   </section>
