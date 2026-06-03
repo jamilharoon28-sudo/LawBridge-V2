@@ -1,29 +1,141 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection, getEntry } from "astro:content";
 
-const page = await getEntry("pages", "blog");
+const posts = [
+  {
+    title: "How to Read Business News Like a Lawyer",
+    category: "Commercial awareness",
+    description:
+      "A practical framework for interpreting business stories through legal, commercial and risk lenses.",
+    initial: "C",
+  },
+  {
+    title: "What Students Should Know About Contract Clauses",
+    category: "Contract breakdowns",
+    description:
+      "A simple guide to structure, risk allocation, commercial purpose and common mistakes.",
+    initial: "K",
+  },
+  {
+    title: "Preparing for Application Season Without Overwhelm",
+    category: "Application guidance",
+    description:
+      "A practical approach to planning applications, interviews and assessment centres.",
+    initial: "A",
+  },
+  {
+    title: "What In-House Lawyers Actually Do",
+    category: "Practice insights",
+    description:
+      "An introduction to GCs, legal teams, business partnering and commercial judgement.",
+    initial: "G",
+  },
+  {
+    title: "Using AI Responsibly in Legal Learning",
+    category: "Responsible AI",
+    description:
+      "How to use AI as a learning support tool without treating it as a source of truth.",
+    initial: "AI",
+  },
+];
 
-if (!page) {
-  throw new Error("Blog page content not found.");
-}
-
-const posts = await getCollection("blog");
-const { Content } = await page.render();
+const categories = [
+  "All",
+  "Commercial awareness",
+  "Contract breakdowns",
+  "Application guidance",
+  "Practice insights",
+  "Responsible AI",
+];
 ---
 
-<BaseLayout title={`${page.data.title} | LawBridge`}>
-  <main>
-    <h1>{page.data.title}</h1>
+<BaseLayout title="Blog | LawBridge">
+  <section class="page-hero">
+    <div class="container page-grid">
+      <div>
+        <p class="eyebrow">Blog</p>
+        <h1>Practical legal insight for students, graduates and future lawyers.</h1>
+        <p>
+          Read student-led articles, LawBridge guides, guest professional
+          insights, contract breakdowns and career advice.
+        </p>
 
-    <Content />
+        <div class="actions">
+          <a class="btn primary" href="#blog-list">Read Latest Articles</a>
+          <a class="btn ghost" href="/resources">Explore Resources</a>
+        </div>
+      </div>
 
-    {posts.map((post) => (
-      <article>
-        <h2>{post.data.title}</h2>
-        <p>{post.data.excerpt}</p>
-        <a href={`/blog/${post.slug}`}>Read more</a>
+      <div class="dashboard mini">
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Commercial awareness</strong>
+          <span>Understand business stories through a legal lens.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Contract breakdowns</strong>
+          <span>Learn how legal documents manage risk.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Career guidance</strong>
+          <span>Prepare with clarity and confidence.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream" id="blog-list">
+    <div class="container blog-layout">
+      <div class="blog-main">
+        {posts.map((post) => (
+          <article class="post">
+            <div class="post-img">{post.initial}</div>
+
+            <div>
+              <span class="pill">{post.category}</span>
+              <h2>{post.title}</h2>
+              <p>{post.description}</p>
+              <a class="link" href="/contact?tab=student">Read article</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <aside class="sidebar">
+        <h3>Categories</h3>
+        {categories.map((category, index) => (
+          <button class={index === 0 ? "active" : ""}>{category}</button>
+        ))}
+      </aside>
+    </div>
+  </section>
+
+  <section class="section navy overlap">
+    <div class="container grid g2">
+      <article class="card">
+        <span>S</span>
+        <h3>Student-led insights</h3>
+        <p>
+          A platform for student voices, reviewed with care and aligned with
+          LawBridge’s practical development mission.
+        </p>
       </article>
-    ))}
-  </main>
+
+      <article class="card">
+        <span>G</span>
+        <h3>Guest professional insights</h3>
+        <p>
+          Learn from people closer to practice, including lawyers, mentors and
+          contributors across the legal sector.
+        </p>
+      </article>
+    </div>
+  </section>
 </BaseLayout>
