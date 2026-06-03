@@ -2324,3 +2324,186 @@ html {
     animation: none !important;
   }
 }
+/* LAWBRIDGE RESOURCES PAGE — PREMIUM STYLING */
+
+/* Controls (filters and skill dropdown) */
+.resource-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+  margin: 2rem 0 1rem;
+}
+
+.resource-filter,
+#skillFilter {
+  min-height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 150, 82, 0.28);
+  background: #ffffff;
+  color: #041b32;
+  font-weight: 800;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.resource-filter.active {
+  background: linear-gradient(135deg, #e7b65f, #c99652);
+  color: #041b32;
+  box-shadow: 0 14px 34px rgba(201, 150, 82, 0.22);
+}
+
+/* Resource cards */
+.resource-library {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.resource-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #ffffff, #fbf8f2);
+  border: 1px solid rgba(201, 150, 82, 0.24);
+  box-shadow: 0 22px 60px rgba(4, 27, 50, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.3s ease;
+  flex-wrap: wrap;
+}
+
+.resource-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e7b65f, #c99652);
+}
+
+.resource-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 32px 90px rgba(4, 27, 50, 0.18);
+  border-color: rgba(201, 150, 82, 0.45);
+  background: linear-gradient(145deg, #fffaf0, #fbf8f2);
+}
+
+/* Card content */
+.resource-code {
+  display: inline-flex;
+  margin-bottom: 0.9rem;
+  padding: 0.42rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(201, 150, 82, 0.15);
+  color: #9b6b2d;
+  font-weight: 900;
+}
+
+.resource-card .eyebrow {
+  margin-bottom: 0.6rem;
+  font-weight: 800;
+  color: #334155;
+}
+
+.resource-card h3 {
+  color: #041b32;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+}
+
+.resource-card p {
+  color: #334155;
+  margin: 0;
+}
+
+/* Download buttons inside cards */
+.resource-downloads {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  min-width: min(420px, 100%);
+}
+
+.resource-download {
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.resource-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(201, 150, 82, 0.28);
+}
+
+.resource-download::after {
+  content: "";
+  position: absolute;
+  top: -80%;
+  left: -60%;
+  width: 45%;
+  height: 260%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: rotate(18deg);
+  transition: left 0.6s ease;
+}
+
+.resource-download:hover::after {
+  left: 125%;
+}
+
+/* Grid for multiple cards */
+.resource-library {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .resource-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .resource-downloads {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .resource-download {
+    width: 100%;
+  }
+
+  .resource-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Simple entrance animation */
+.resource-card {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: resourceFadeUp 0.8s ease forwards;
+}
+
+.resource-card:nth-child(1) { animation-delay: 0.05s; }
+.resource-card:nth-child(2) { animation-delay: 0.12s; }
+.resource-card:nth-child(3) { animation-delay: 0.18s; }
+.resource-card:nth-child(4) { animation-delay: 0.24s; }
+.resource-card:nth-child(5) { animation-delay: 0.30s; }
+.resource-card:nth-child(6) { animation-delay: 0.36s; }
+
+@keyframes resourceFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
