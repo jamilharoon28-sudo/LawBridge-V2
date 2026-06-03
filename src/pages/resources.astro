@@ -1,29 +1,220 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection, getEntry } from "astro:content";
 
-const page = await getEntry("pages", "resources");
-
-if (!page) {
-  throw new Error("Resources page content not found.");
-}
-
-const resources = await getCollection("resources");
-const { Content } = await page.render();
+const resources = [
+  {
+    title: "Contract Breakdown Guide",
+    category: "Contract breakdowns",
+    type: "Free guide",
+    description:
+      "Understand how a commercial contract is structured and why key clauses matter.",
+  },
+  {
+    title: "Commercial Awareness Starter Pack",
+    category: "Commercial awareness",
+    type: "Free pack",
+    description:
+      "Learn how business context affects legal advice and client decision-making.",
+  },
+  {
+    title: "Legal Career Roadmap",
+    category: "Career readiness",
+    type: "Roadmap",
+    description:
+      "Explore legal career routes and the skills needed to prepare.",
+  },
+  {
+    title: "SQE-to-Practice Explainer",
+    category: "SQE to practice",
+    type: "Guide",
+    description:
+      "Understand how SQE knowledge can connect to practical legal scenarios.",
+  },
+  {
+    title: "Responsible AI Learning Guide",
+    category: "Responsible AI",
+    type: "Guide",
+    description:
+      "Use AI carefully in legal learning while preserving judgement.",
+  },
+  {
+    title: "Interview Preparation Checklist",
+    category: "Application guidance",
+    type: "Checklist",
+    description:
+      "Prepare structured examples and practical answers.",
+  },
+];
 ---
 
-<BaseLayout title={`${page.data.title} | LawBridge`}>
-  <main>
-    <h1>{page.data.title}</h1>
+<BaseLayout title="Resources | LawBridge">
+  <section class="page-hero">
+    <div class="container page-grid">
+      <div>
+        <p class="eyebrow">Resources</p>
+        <h1>Practical legal resources for aspiring lawyers.</h1>
+        <p>
+          Explore guides, checklists, explainers and learning materials designed
+          to help students connect legal education with real-world legal practice.
+        </p>
 
-    <Content />
+        <div class="actions">
+          <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
+          <a class="btn ghost" href="/workshops">Explore Workshops</a>
+        </div>
+      </div>
 
-    {resources.map((resource) => (
-      <article>
-        <h2>{resource.data.title}</h2>
-        <p>{resource.data.type}</p>
-        <a href={`/resources/${resource.slug}`}>View resource</a>
-      </article>
-    ))}
-  </main>
+      <div class="dashboard mini">
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Guides</strong>
+          <span>Clear practical explanations.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Checklists</strong>
+          <span>Structured preparation tools.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Career support</strong>
+          <span>Resources for applications and confidence.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Practical skills curriculum</p>
+        <h2>Develop the skills legal education alone cannot fully provide.</h2>
+        <p>
+          The LawBridge curriculum is built around practical skills aspiring
+          lawyers need to become more commercially aware, confident and
+          practice-ready.
+        </p>
+      </div>
+
+      <div class="grid g4">
+        <article class="curric">
+          <span class="icon">01</span>
+          <h3>Legal Research</h3>
+          <p>
+            Learn how to find, assess and apply legal information in a practical
+            context.
+          </p>
+        </article>
+
+        <article class="curric">
+          <span class="icon">02</span>
+          <h3>Legal Drafting</h3>
+          <p>
+            Develop confidence in drafting clear, practical legal documents.
+          </p>
+        </article>
+
+        <article class="curric">
+          <span class="icon">03</span>
+          <h3>Client Interviewing</h3>
+          <p>
+            Learn how lawyers gather information, ask effective questions and
+            understand client objectives.
+          </p>
+        </article>
+
+        <article class="curric">
+          <span class="icon">04</span>
+          <h3>Matter Analysis</h3>
+          <p>
+            Break down complex matters into legal, commercial, practical and
+            strategic issues.
+          </p>
+        </article>
+
+        <article class="curric">
+          <span class="icon">05</span>
+          <h3>Negotiation</h3>
+          <p>
+            Learn how lawyers prepare for and participate in commercial
+            negotiations.
+          </p>
+        </article>
+
+        <article class="curric">
+          <span class="icon">06</span>
+          <h3>Commercial Awareness</h3>
+          <p>
+            Understand legal work in a business context.
+          </p>
+        </article>
+
+        <article class="curric">
+          <span class="icon">07</span>
+          <h3>Responsible AI</h3>
+          <p>
+            Use AI carefully while recognising limitations.
+          </p>
+        </article>
+
+        <article class="curric">
+          <span class="icon">08</span>
+          <h3>Professional Readiness</h3>
+          <p>
+            Build the habits expected in professional legal environments.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light overlap">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Resource library</p>
+        <h2>Explore practical materials.</h2>
+        <p>
+          These resources can later be connected to Decap CMS so they are fully
+          editable from the admin panel.
+        </p>
+      </div>
+
+      <div class="grid g3">
+        {resources.map((resource) => (
+          <article class="resource">
+            <div class="meta">
+              <span>{resource.category}</span>
+              <span>{resource.type}</span>
+            </div>
+            <h3>{resource.title}</h3>
+            <p>{resource.description}</p>
+            <a class="link" href="/contact?tab=student">Access resource</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy">
+    <div class="container cta-panel">
+      <div>
+        <p class="eyebrow">Build practical legal capability</p>
+        <h2>Use LawBridge resources to move from knowledge to confidence.</h2>
+        <p>
+          Start with practical guides, then progress into webinars, workshops and
+          mentor-supported development.
+        </p>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
+        <a class="btn ghost" href="/workshops">Explore Workshops</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
