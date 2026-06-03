@@ -1,141 +1,133 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getEntry } from "astro:content";
 
-const posts = [
-  {
-    title: "How to Read Business News Like a Lawyer",
-    category: "Commercial awareness",
-    description:
-      "A practical framework for interpreting business stories through legal, commercial and risk lenses.",
-    initial: "C",
-  },
-  {
-    title: "What Students Should Know About Contract Clauses",
-    category: "Contract breakdowns",
-    description:
-      "A simple guide to structure, risk allocation, commercial purpose and common mistakes.",
-    initial: "K",
-  },
-  {
-    title: "Preparing for Application Season Without Overwhelm",
-    category: "Application guidance",
-    description:
-      "A practical approach to planning applications, interviews and assessment centres.",
-    initial: "A",
-  },
-  {
-    title: "What In-House Lawyers Actually Do",
-    category: "Practice insights",
-    description:
-      "An introduction to GCs, legal teams, business partnering and commercial judgement.",
-    initial: "G",
-  },
-  {
-    title: "Using AI Responsibly in Legal Learning",
-    category: "Responsible AI",
-    description:
-      "How to use AI as a learning support tool without treating it as a source of truth.",
-    initial: "AI",
-  },
-];
+const page = await getEntry("pages", "blog");
+const data = page?.data;
 
-const categories = [
-  "All",
-  "Commercial awareness",
-  "Contract breakdowns",
-  "Application guidance",
-  "Practice insights",
-  "Responsible AI",
-];
+const hero = data?.hero ?? {};
+const sections = data?.sections ?? {};
+const cards = data?.cards ?? {};
+const buttons = data?.buttons ?? {};
 ---
 
-<BaseLayout title="Blog | LawBridge">
-  <section class="page-hero">
-    <div class="container page-grid">
+<BaseLayout title={data?.title ?? "Blog | LawBridge"}>
+  <section class="hero">
+    <div class="container hero-grid">
       <div>
-        <p class="eyebrow">Blog</p>
-        <h1>Practical legal insight for students, graduates and future lawyers.</h1>
-        <p>
-          Read student-led articles, LawBridge guides, guest professional
-          insights, contract breakdowns and career advice.
-        </p>
-
-        <div class="actions">
-          <a class="btn primary" href="#blog-list">Read Latest Articles</a>
-          <a class="btn ghost" href="/resources">Explore Resources</a>
-        </div>
+        <p class="eyebrow">{hero.eyebrow}</p>
+        <h1>{hero.heading}</h1>
+        <p class="hero-lead">{hero.description}</p>
       </div>
 
-      <div class="dashboard mini">
-        <div class="dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <div class="dashboard-card">
+        <span class="pill">LawBridge Blog</span>
+        <h2>Practical legal insight</h2>
+        <p>Articles, guides and commentary for aspiring legal professionals.</p>
 
-        <div class="mini-card">
-          <strong>Commercial awareness</strong>
-          <span>Understand business stories through a legal lens.</span>
-        </div>
-
-        <div class="mini-card">
-          <strong>Contract breakdowns</strong>
-          <span>Learn how legal documents manage risk.</span>
-        </div>
-
-        <div class="mini-card">
-          <strong>Career guidance</strong>
-          <span>Prepare with clarity and confidence.</span>
+        <div class="dashboard-list">
+          <span>Career guidance</span>
+          <span>Commercial awareness</span>
+          <span>SQE and QWE</span>
+          <span>AI and legal technology</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section cream" id="blog-list">
-    <div class="container blog-layout">
-      <div class="blog-main">
-        {posts.map((post) => (
-          <article class="post">
-            <div class="post-img">{post.initial}</div>
+  <section class="section cream">
+    <div class="container">
+      <p class="eyebrow">{sections.problem?.eyebrow}</p>
+      <h2>{sections.problem?.heading}</h2>
+      <p class="section-intro">{sections.problem?.description}</p>
 
-            <div>
-              <span class="pill">{post.category}</span>
-              <h2>{post.title}</h2>
-              <p>{post.description}</p>
-              <a class="link" href="/contact?tab=student">Read article</a>
-            </div>
+      <div class="grid g3">
+        {(cards.problem ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
           </article>
         ))}
       </div>
-
-      <aside class="sidebar">
-        <h3>Categories</h3>
-        {categories.map((category, index) => (
-          <button class={index === 0 ? "active" : ""}>{category}</button>
-        ))}
-      </aside>
     </div>
   </section>
 
-  <section class="section navy overlap">
-    <div class="container grid g2">
-      <article class="card">
-        <span>S</span>
-        <h3>Student-led insights</h3>
-        <p>
-          A platform for student voices, reviewed with care and aligned with
-          LawBridge’s practical development mission.
-        </p>
-      </article>
+  <section class="section light">
+    <div class="container">
+      <p class="eyebrow">{sections.method?.eyebrow}</p>
+      <h2>{sections.method?.heading}</h2>
+      <p class="section-intro">{sections.method?.description}</p>
 
-      <article class="card">
-        <span>G</span>
-        <h3>Guest professional insights</h3>
-        <p>
-          Learn from people closer to practice, including lawyers, mentors and
-          contributors across the legal sector.
-        </p>
-      </article>
+      <div class="grid g4">
+        {(cards.method ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy">
+    <div class="container">
+      <p class="eyebrow">{sections.curriculum?.eyebrow}</p>
+      <h2>{sections.curriculum?.heading}</h2>
+      <p class="section-intro">{sections.curriculum?.description}</p>
+
+      <div class="grid g4">
+        {(cards.curriculum ?? []).map((card) => (
+          <article class="curric">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream">
+    <div class="container">
+      <p class="eyebrow">{sections.pathways?.eyebrow}</p>
+      <h2>{sections.pathways?.heading}</h2>
+      <p class="section-intro">{sections.pathways?.description}</p>
+
+      <div class="grid g2">
+        {(cards.pathways ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+
+            {card.buttonText && (
+              <a class="btn secondary" href={card.buttonLink}>
+                {card.buttonText}
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container cta-panel">
+      <p class="eyebrow">{sections.cta?.eyebrow}</p>
+      <h2>{sections.cta?.heading}</h2>
+      <p>{sections.cta?.description}</p>
+
+      <div class="hero-actions">
+        {buttons.cta?.primaryText && (
+          <a class="btn primary" href={buttons.cta.primaryLink}>
+            {buttons.cta.primaryText}
+          </a>
+        )}
+
+        {buttons.cta?.secondaryText && (
+          <a class="btn secondary" href={buttons.cta.secondaryLink}>
+            {buttons.cta.secondaryText}
+          </a>
+        )}
+      </div>
     </div>
   </section>
 </BaseLayout>
