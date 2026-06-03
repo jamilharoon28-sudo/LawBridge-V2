@@ -1,29 +1,112 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection, getEntry } from "astro:content";
 
-const page = await getEntry("pages", "workshops");
-
-if (!page) {
-  throw new Error("Workshops page content not found.");
-}
-
-const workshops = await getCollection("workshops");
-const { Content } = await page.render();
+const topics = [
+  "Commercial contract drafting",
+  "Negotiation simulations",
+  "Legal problem-solving",
+  "In-house scenarios",
+  "Application guidance",
+  "Interview preparation",
+  "Commercial awareness",
+  "Responsible AI",
+];
 ---
 
-<BaseLayout title={`${page.data.title} | LawBridge`}>
-  <main>
-    <h1>{page.data.title}</h1>
+<BaseLayout title="Workshops & Programmes | LawBridge">
+  <section class="page-hero">
+    <div class="container page-grid">
+      <div>
+        <p class="eyebrow">Workshops & Programmes</p>
+        <h1>Hands-on legal training for real-world skills.</h1>
+        <p>
+          Workshops and programmes help aspiring lawyers practise the skills
+          expected in legal environments.
+        </p>
 
-    <Content />
+        <div class="actions">
+          <a class="btn primary" href="/webinars">Explore Opportunities</a>
+          <a class="btn ghost" href="/contact?tab=student">Join LawBridge</a>
+        </div>
+      </div>
 
-    {workshops.map((workshop) => (
-      <article>
-        <h2>{workshop.data.title}</h2>
-        <p>{workshop.data.date.toLocaleDateString()}</p>
-        <a href={`/workshops/${workshop.slug}`}>View workshop</a>
-      </article>
-    ))}
-  </main>
+      <div class="dashboard mini">
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Applied learning</strong>
+          <span>Practise legal skills through realistic tasks.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Guided development</strong>
+          <span>Build confidence with structured support.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Future pathways</strong>
+          <span>Develop towards deeper skills labs and cohorts.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Learning pathways</p>
+        <h2>Free and paid learning pathways that can evolve over time.</h2>
+        <p>
+          Present future training opportunities without overstating availability.
+        </p>
+      </div>
+
+      <div class="grid g2">
+        <article class="program">
+          <span class="pill">Free</span>
+          <h3>Introductory sessions</h3>
+          <p>
+            Webinars, introductory sessions and panel discussions for awareness,
+            access and early engagement.
+          </p>
+        </article>
+
+        <article class="program">
+          <span class="pill">Future paid pathway</span>
+          <h3>Skills labs and bootcamps</h3>
+          <p>
+            Deeper practical training and structured development through
+            mentor-guided cohorts and applied tasks.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy overlap">
+    <div class="container">
+      <div class="section-head light-text">
+        <p class="eyebrow">Example workshop topics</p>
+        <h2>Practical training built around real legal scenarios.</h2>
+        <p>
+          Workshops help students apply legal knowledge through realistic
+          practice tasks.
+        </p>
+      </div>
+
+      <div class="grid g4">
+        {topics.map((topic, index) => (
+          <article class="card">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{topic}</h3>
+            <p>A practical session designed to build applied confidence.</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
