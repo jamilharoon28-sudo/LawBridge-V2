@@ -1842,3 +1842,172 @@ h3 {
     border-radius: 22px;
   }
 }
+/* LAWBRIDGE PREMIUM POLISH — dividers, motion, depth */
+
+/* Subtle premium section dividers */
+.section::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(1120px, calc(100% - 2rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 150, 82, 0.45),
+    transparent
+  );
+}
+
+/* Editorial gold accent before section headings */
+.section > .container > h2::before {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 4px;
+  margin-bottom: 1.15rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e7b65f, #c99652);
+}
+
+/* Hero dashboard glass polish */
+.hero .dashboard-card {
+  backdrop-filter: blur(18px);
+  transform: translateY(0);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hero .dashboard-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 42px 110px rgba(0, 0, 0, 0.34);
+}
+
+/* Gold marker icons on cards */
+.card h3::before,
+.curric h3::before {
+  content: "";
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 0.65rem;
+  border-radius: 999px;
+  background: #c99652;
+  box-shadow: 0 0 0 6px rgba(201, 150, 82, 0.14);
+  vertical-align: 0.08em;
+}
+
+.section.navy .card h3::before,
+.section.navy .curric h3::before {
+  background: #e7b65f;
+  box-shadow: 0 0 0 6px rgba(231, 182, 95, 0.16);
+}
+
+/* Stronger button interaction */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn.primary:hover {
+  box-shadow: 0 20px 44px rgba(201, 150, 82, 0.36);
+}
+
+.btn.secondary:hover,
+.btn.ghost:hover {
+  border-color: rgba(231, 182, 95, 0.7);
+  box-shadow: 0 18px 42px rgba(4, 27, 50, 0.18);
+}
+
+/* Softer page entrance */
+.hero h1,
+.hero-lead,
+.hero .eyebrow,
+.hero-actions,
+.hero .dashboard-card {
+  animation: lawbridgeFadeUp 0.75s ease both;
+}
+
+.hero-lead {
+  animation-delay: 0.08s;
+}
+
+.hero-actions {
+  animation-delay: 0.16s;
+}
+
+.hero .dashboard-card {
+  animation-delay: 0.22s;
+}
+
+@keyframes lawbridgeFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Premium focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(231, 182, 95, 0.85);
+  outline-offset: 4px;
+}
+
+/* Better paragraph readability */
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+/* Mobile refinement */
+@media (max-width: 700px) {
+  .hero {
+    padding-top: 3.8rem;
+  }
+
+  .hero .eyebrow,
+  .section > .container > .eyebrow {
+    font-size: 0.85rem;
+  }
+
+  .hero h1 {
+    letter-spacing: -0.045em;
+  }
+
+  .section > .container > h2::before {
+    width: 54px;
+    height: 3px;
+  }
+
+  .card h3::before,
+  .curric h3::before {
+    width: 0.58rem;
+    height: 0.58rem;
+    margin-right: 0.5rem;
+  }
+}
