@@ -1,138 +1,132 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getEntry } from "astro:content";
 
-const events = [
-  {
-    title: "Commercial Awareness for Aspiring Lawyers",
-    type: "Webinar",
-    status: "Upcoming",
-    location: "Virtual",
-    description:
-      "Learn how businesses make decisions and how lawyers support commercial objectives.",
-  },
-  {
-    title: "Inside In-House Legal Work",
-    type: "Webinar",
-    status: "Upcoming",
-    location: "Virtual",
-    description:
-      "Understand the role of GCs, in-house counsel and legal teams inside organisations.",
-  },
-  {
-    title: "Application Season Preparation",
-    type: "Webinar",
-    status: "Upcoming",
-    location: "Virtual",
-    description:
-      "Practical preparation for CVs, interviews, assessment centres and applications.",
-  },
-  {
-    title: "Responsible AI in Legal Learning",
-    type: "Webinar",
-    status: "Planned",
-    location: "Virtual",
-    description:
-      "Learn how AI can support learning without replacing judgement.",
-  },
-];
+const page = await getEntry("pages", "webinars");
+const data = page?.data;
 
-const tags = [
-  "Career insights",
-  "Industry panels",
-  "UK legal market",
-  "Commercial awareness",
-  "Practice areas",
-  "In-house legal",
-  "Applications",
-  "Legal technology",
-  "Responsible AI",
-];
+const hero = data?.hero ?? {};
+const sections = data?.sections ?? {};
+const cards = data?.cards ?? {};
+const buttons = data?.buttons ?? {};
 ---
 
-<BaseLayout title="Webinars | LawBridge">
-  <section class="page-hero">
-    <div class="container page-grid">
+<BaseLayout title={data?.title ?? "Webinars | LawBridge"}>
+  <section class="hero">
+    <div class="container hero-grid">
       <div>
-        <p class="eyebrow">Webinars</p>
-        <h1>Legal insight made accessible.</h1>
-        <p>
-          LawBridge webinars give aspiring lawyers access to career insights,
-          commercial awareness, practice-area guidance and practical perspectives.
-        </p>
-
-        <div class="actions">
-          <a class="btn primary" href="#webinars-list">View Webinars</a>
-          <a class="btn ghost" href="/contact?tab=student">Register Interest</a>
-        </div>
+        <p class="eyebrow">{hero.eyebrow}</p>
+        <h1>{hero.heading}</h1>
+        <p class="hero-lead">{hero.description}</p>
       </div>
 
-      <div class="dashboard mini">
-        <div class="dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <div class="dashboard-card">
+        <span class="pill">Webinars</span>
+        <h2>Professional legal insight</h2>
+        <p>Accessible sessions with mentors, speakers and legal professionals.</p>
 
-        <div class="mini-card">
-          <strong>Career insights</strong>
-          <span>Learn from practical legal perspectives.</span>
-        </div>
-
-        <div class="mini-card">
-          <strong>Commercial awareness</strong>
-          <span>Understand legal work in business context.</span>
-        </div>
-
-        <div class="mini-card">
-          <strong>Practice areas</strong>
-          <span>Explore different routes into legal work.</span>
+        <div class="dashboard-list">
+          <span>Legal careers</span>
+          <span>Practice areas</span>
+          <span>Commercial awareness</span>
+          <span>Future lawyer skills</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section cream" id="webinars-list">
+  <section class="section cream">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Upcoming webinars</p>
-        <h2>Accessible insights from the legal profession.</h2>
-        <p>
-          Each webinar card can later be managed by CMS.
-        </p>
-      </div>
+      <p class="eyebrow">{sections.problem?.eyebrow}</p>
+      <h2>{sections.problem?.heading}</h2>
+      <p class="section-intro">{sections.problem?.description}</p>
 
-      <div class="grid g4">
-        {events.map((event) => (
-          <article class="event">
-            <span class="pill">{event.type}</span>
-            <h3>{event.title}</h3>
-            <p>{event.description}</p>
-            <div class="meta">
-              <span>{event.status}</span>
-              <span>{event.location}</span>
-            </div>
-            <a class="link" href="/contact?tab=student">Register interest</a>
+      <div class="grid g3">
+        {(cards.problem ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section navy overlap">
-    <div class="container split">
-      <div>
-        <p class="eyebrow">Why attend</p>
-        <h2>Learn directly from practical legal perspectives.</h2>
-        <p>
-          Webinars help students understand the profession beyond textbooks,
-          applications and generic career advice.
-        </p>
-      </div>
+  <section class="section light">
+    <div class="container">
+      <p class="eyebrow">{sections.method?.eyebrow}</p>
+      <h2>{sections.method?.heading}</h2>
+      <p class="section-intro">{sections.method?.description}</p>
 
-      <div class="tags">
-        {tags.map((tag) => (
-          <span>{tag}</span>
+      <div class="grid g4">
+        {(cards.method ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy">
+    <div class="container">
+      <p class="eyebrow">{sections.curriculum?.eyebrow}</p>
+      <h2>{sections.curriculum?.heading}</h2>
+      <p class="section-intro">{sections.curriculum?.description}</p>
+
+      <div class="grid g4">
+        {(cards.curriculum ?? []).map((card) => (
+          <article class="curric">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream">
+    <div class="container">
+      <p class="eyebrow">{sections.pathways?.eyebrow}</p>
+      <h2>{sections.pathways?.heading}</h2>
+      <p class="section-intro">{sections.pathways?.description}</p>
+
+      <div class="grid g2">
+        {(cards.pathways ?? []).map((card) => (
+          <article class="card">
+            <h3>{card.title}</h3>
+            <p>{card.description}</p>
+
+            {card.buttonText && (
+              <a class="btn secondary" href={card.buttonLink}>
+                {card.buttonText}
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container cta-panel">
+      <p class="eyebrow">{sections.cta?.eyebrow}</p>
+      <h2>{sections.cta?.heading}</h2>
+      <p>{sections.cta?.description}</p>
+
+      <div class="hero-actions">
+        {buttons.cta?.primaryText && (
+          <a class="btn primary" href={buttons.cta.primaryLink}>
+            {buttons.cta.primaryText}
+          </a>
+        )}
+
+        {buttons.cta?.secondaryText && (
+          <a class="btn secondary" href={buttons.cta.secondaryLink}>
+            {buttons.cta.secondaryText}
+          </a>
+        )}
       </div>
     </div>
   </section>
