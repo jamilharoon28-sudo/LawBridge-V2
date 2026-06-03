@@ -1,18 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const pages = await getCollection("pages");
+const homePage = pages.find((page) => page.slug === "home");
+
+const data = homePage?.data ?? {};
+
+const title = data.title ?? "LawBridge | Practical Legal Development";
+const eyebrow =
+  data.eyebrow ?? "Practical legal development for the SQE, QWE and AI era";
+const heading =
+  data.heading ?? "Bridge the gap between legal education and real-world legal practice.";
+const description =
+  data.description ??
+  "LawBridge helps aspiring lawyers build practical legal capability through structured learning, real-world exercises, mentor guidance, workshops, webinars and commercial awareness training.";
 ---
 
-<BaseLayout title="LawBridge | Practical Legal Development">
+<BaseLayout title={title}>
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <p class="eyebrow">Practical legal development for the SQE, QWE and AI era</p>
-        <h1>Bridge the gap between legal education and real-world legal practice.</h1>
-        <p>
-          LawBridge helps aspiring lawyers build practical legal capability through
-          structured learning, real-world exercises, mentor guidance, workshops,
-          webinars and commercial awareness training.
-        </p>
+        <p class="eyebrow">{eyebrow}</p>
+        <h1>{heading}</h1>
+        <p>{description}</p>
 
         <div class="actions">
           <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
