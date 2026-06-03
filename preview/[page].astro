@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Astro } from "astro";
+
+const pageId = Astro.params.page;
+
+// Mock CMS data (replace with real CMS connection)
+const cmsData = {
+  homepage: {
+    hero: { heading: "Welcome to LawBridge", description: "Practical legal skills for students and graduates" },
+    sections: ["Section 1 content", "Section 2 content"],
+    buttons: ["Sign Up", "Learn More"],
+    dashboard: "Dashboard text",
+  },
+  about: {
+    heading: "About LawBridge",
+    description: "We connect students with mentors",
+    team: ["Jane Doe", "John Smith"],
+    values: ["Professionalism", "Excellence", "Practicality"],
+  },
+  students: { hero: "Students Hero", curriculum: ["Module 1", "Module 2"], resources: ["Resource 1", "Resource 2"] },
+  mentors: { hero: "Mentors Hero", mentorshipProgram: "Program description", testimonials: ["Testimonial 1"] },
+  resources: { hero: "Resources Hero", filters: ["Skill 1", "Skill 2"], downloads: ["Resource Pack 1"] },
+  blog: { posts: ["Post 1", "Post 2"], featured: ["Featured 1"], categories: ["Category 1"] },
+  workshops: { upcoming: ["Workshop 1"], past: ["Workshop 2"], details: "Workshop details" },
+  webinars: { upcoming: ["Webinar 1"], past: ["Webinar 2"], speakers: ["Speaker 1"] },
+};
+
+const previewPage = cmsData[pageId] ?? {};
+---
+
+<BaseLayout title={`Preview ${pageId} | LawBridge`}>
+  <section class="section cream">
+    <div class="container">
+      <h1>Preview: {pageId}</h1>
+      <p>This is a live preview of the page you are editing in the admin panel.</p>
+
+      {Object.entries(previewPage).map(([key, value]) => (
+        <div class="preview-field">
+          <h3>{key}</h3>
+          {Array.isArray(value) ? (
+            <ul>
+              {value.map((item) => <li>{item}</li>)}
+            </ul>
+          ) : (
+            <p>{value}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <style is:inline>
+    .preview-field {
+      margin-bottom: 1.5rem;
+    }
+
+    .preview-field h3 {
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+      color: #041b32;
+    }
+
+    .preview-field p,
+    .preview-field ul {
+      margin: 0;
+      color: #334155;
+    }
+
+    .preview-field ul {
+      padding-left: 1.2rem;
+      list-style-type: disc;
+    }
+  </style>
+</BaseLayout>
