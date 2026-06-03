@@ -18,17 +18,15 @@ collections:
       - label: "Hero"
         name: "hero"
         widget: "object"
+        required: false
         fields:
           - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
           - { label: "Heading", name: "heading", widget: "string", required: false }
           - { label: "Description", name: "description", widget: "text", required: false }
-
           - { label: "Primary Button Text", name: "primaryButtonText", widget: "string", required: false }
           - { label: "Primary Button Link", name: "primaryButtonLink", widget: "string", required: false }
-
           - { label: "Secondary Button Text", name: "secondaryButtonText", widget: "string", required: false }
           - { label: "Secondary Button Link", name: "secondaryButtonLink", widget: "string", required: false }
-
           - { label: "Tertiary Button Text", name: "tertiaryButtonText", widget: "string", required: false }
           - { label: "Tertiary Button Link", name: "tertiaryButtonLink", widget: "string", required: false }
 
@@ -40,6 +38,7 @@ collections:
           - label: "Problem Section"
             name: "problem"
             widget: "object"
+            required: false
             fields:
               - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
               - { label: "Heading", name: "heading", widget: "string", required: false }
@@ -48,6 +47,7 @@ collections:
           - label: "Method Section"
             name: "method"
             widget: "object"
+            required: false
             fields:
               - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
               - { label: "Heading", name: "heading", widget: "string", required: false }
@@ -56,6 +56,7 @@ collections:
           - label: "Curriculum Section"
             name: "curriculum"
             widget: "object"
+            required: false
             fields:
               - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
               - { label: "Heading", name: "heading", widget: "string", required: false }
@@ -64,6 +65,7 @@ collections:
           - label: "Pathways Section"
             name: "pathways"
             widget: "object"
+            required: false
             fields:
               - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
               - { label: "Heading", name: "heading", widget: "string", required: false }
@@ -72,6 +74,7 @@ collections:
           - label: "CTA Section"
             name: "cta"
             widget: "object"
+            required: false
             fields:
               - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
               - { label: "Heading", name: "heading", widget: "string", required: false }
@@ -85,6 +88,7 @@ collections:
           - label: "Problem Cards"
             name: "problem"
             widget: "list"
+            required: false
             fields:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
@@ -92,6 +96,7 @@ collections:
           - label: "Method Cards"
             name: "method"
             widget: "list"
+            required: false
             fields:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
@@ -99,6 +104,7 @@ collections:
           - label: "Curriculum Cards"
             name: "curriculum"
             widget: "list"
+            required: false
             fields:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
@@ -106,6 +112,7 @@ collections:
           - label: "Pathway Cards"
             name: "pathways"
             widget: "list"
+            required: false
             fields:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
@@ -120,6 +127,7 @@ collections:
           - label: "CTA"
             name: "cta"
             widget: "object"
+            required: false
             fields:
               - { label: "Primary Text", name: "primaryText", widget: "string", required: false }
               - { label: "Primary Link", name: "primaryLink", widget: "string", required: false }
@@ -127,7 +135,7 @@ collections:
               - { label: "Secondary Link", name: "secondaryLink", widget: "string", required: false }
 
   - name: "blog"
-    label: "Blog"
+    label: "Blog Posts"
     folder: "src/content/blog"
     create: true
     slug: "{{slug}}"
