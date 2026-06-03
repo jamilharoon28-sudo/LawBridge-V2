@@ -68,13 +68,13 @@ const resources = [
   <section class="section cream">
     <div class="container">
       <div class="tabs">
-        <a class="btn secondary" href="#student">Student</a>
-        <a class="btn secondary" href="#mentor">Mentor</a>
-        <a class="btn secondary" href="#partner">Partner</a>
-        <a class="btn secondary" href="#resource">Resource</a>
+        <button class="active" type="button" data-tab="student">Student</button>
+        <button type="button" data-tab="mentor">Mentor</button>
+        <button type="button" data-tab="partner">Partner</button>
+        <button type="button" data-tab="resource">Resource</button>
       </div>
 
-      <section class="form-panel active" id="student">
+      <section class="form-panel active" id="student" data-panel="student">
         <div class="form-intro">
           <h2>Join LawBridge as a Student</h2>
           <p>Tell us where you are in your legal journey.</p>
@@ -146,7 +146,7 @@ const resources = [
         </form>
       </section>
 
-      <section class="form-panel active" id="mentor">
+      <section class="form-panel" id="mentor" data-panel="mentor">
         <div class="form-intro">
           <h2>Apply to Become a Mentor</h2>
           <p>Tell us how you would like to support LawBridge.</p>
@@ -209,7 +209,7 @@ const resources = [
         </form>
       </section>
 
-      <section class="form-panel active" id="partner">
+      <section class="form-panel" id="partner" data-panel="partner">
         <div class="form-intro">
           <h2>Submit Partnership Enquiry</h2>
           <p>For universities, law societies, firms and organisations.</p>
@@ -276,7 +276,7 @@ const resources = [
         </form>
       </section>
 
-      <section class="form-panel active" id="resource">
+      <section class="form-panel" id="resource" data-panel="resource">
         <div class="form-intro">
           <h2>Download a LawBridge Resource</h2>
           <p>Request a practical resource.</p>
@@ -332,4 +332,39 @@ const resources = [
       </section>
     </div>
   </section>
+
+  <script>
+    const tabs = document.querySelectorAll("[data-tab]");
+    const panels = document.querySelectorAll("[data-panel]");
+
+    function activateTab(tabName) {
+      tabs.forEach((tab) => {
+        tab.classList.toggle("active", tab.getAttribute("data-tab") === tabName);
+      });
+
+      panels.forEach((panel) => {
+        panel.classList.toggle("active", panel.getAttribute("data-panel") === tabName);
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const tabName = tab.getAttribute("data-tab");
+        if (tabName) {
+          activateTab(tabName);
+          history.replaceState(null, "", `#${tabName}`);
+        }
+      });
+    });
+
+    const hash = window.location.hash.replace("#", "");
+    const query = new URLSearchParams(window.location.search);
+    const queryTab = query.get("tab");
+
+    if (queryTab) {
+      activateTab(queryTab);
+    } else if (hash) {
+      activateTab(hash);
+    }
+  </script>
 </BaseLayout>
