@@ -1235,3 +1235,26 @@ h3 {
     padding: 6px 10px;
   }
 }
+.header .brand {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.brand-logo {
+  display: block;
+  width: 180px;
+  height: auto;
+  object-fit: contain;
+}
+
+.footer .brand {
+  background: transparent;
+  padding: 0;
+}
+
+.footer-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 18px;
+}
