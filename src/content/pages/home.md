@@ -1,5 +1,8 @@
 ---
-title: Home
+title: "LawBridge | Practical Legal Development"
+eyebrow: "Practical legal development for the SQE, QWE and AI era"
+heading: "Bridge the gap between legal education and real-world legal practice."
+description: "LawBridge helps aspiring lawyers build practical legal capability through structured learning, real-world exercises, mentor guidance, workshops, webinars and commercial awareness training."
 ---
 
-LawBridge is a legal education and development platform for aspiring lawyers, students, graduates and legal professionals.
+This page controls the editable homepage hero content.
