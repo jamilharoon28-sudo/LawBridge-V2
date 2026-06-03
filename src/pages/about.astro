@@ -1,19 +1,142 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getEntry } from "astro:content";
 
-const page = await getEntry("pages", "about");
+const values = [
+  "Practicality",
+  "Access",
+  "Credibility",
+  "Responsibility",
+  "Progression",
+  "Structure",
+];
 
-if (!page) {
-  throw new Error("About page content not found.");
-}
-
-const { Content } = await page.render();
+const founders = [
+  {
+    name: "Haroon Jamil",
+    role: "Founder",
+  },
+  {
+    name: "Mohammad Jamil",
+    role: "Co-Founder / Stakeholder",
+  },
+  {
+    name: "Adeelah Jamil",
+    role: "Co-Founder / Stakeholder",
+  },
+];
 ---
 
-<BaseLayout title={`${page.data.title} | LawBridge`}>
-  <main>
-    <h1>{page.data.title}</h1>
-    <Content />
-  </main>
+<BaseLayout title="About | LawBridge">
+  <section class="page-hero">
+    <div class="container page-grid">
+      <div>
+        <p class="eyebrow">About</p>
+        <h1>LawBridge exists to make practical legal development more accessible.</h1>
+        <p>
+          LawBridge was created to help aspiring lawyers access practical insight,
+          professional guidance and commercial awareness.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="/contact?tab=student">Join LawBridge</a>
+          <a class="btn ghost" href="#about-founders">Meet the Founders</a>
+        </div>
+      </div>
+
+      <div class="dashboard mini">
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Access</strong>
+          <span>Open practical legal development to more aspiring lawyers.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Readiness</strong>
+          <span>Help students move from legal knowledge to capability.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Confidence</strong>
+          <span>Build judgement, communication and commercial awareness.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Our mission</p>
+        <h2>Bridge the gap between legal education and real-world practice.</h2>
+      </div>
+
+      <div>
+        <p>
+          Our mission is to help aspiring lawyers build practical skills,
+          commercial awareness, judgement and confidence through structured
+          learning, mentorship, resources, workshops and webinars.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light overlap">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Why LawBridge matters</p>
+        <h2>The profession is changing. Students need practical preparation.</h2>
+        <p>
+          SQE, QWE, technology and AI are reshaping how lawyers train and
+          develop.
+        </p>
+      </div>
+
+      <div class="grid g3">
+        {values.map((value) => (
+          <article class="card">
+            <span>{value[0]}</span>
+            <h3>{value}</h3>
+            <p>
+              A core value that supports useful, honest and practical legal
+              development.
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream" id="about-founders">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Founders</p>
+        <h2>Built by a team focused on access, practical learning and readiness.</h2>
+        <p>
+          Founder visibility is important because LawBridge is new.
+        </p>
+      </div>
+
+      <div class="grid g3">
+        {founders.map((founder) => (
+          <article class="profile">
+            <div class="profile-img">
+              <span>{founder.name[0]}</span>
+            </div>
+            <span class="pill">{founder.role}</span>
+            <h3>{founder.name}</h3>
+            <p>
+              Founder profile placeholder. Add the approved credibility-led
+              biography, professional background and reason for supporting
+              LawBridge.
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
