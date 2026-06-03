@@ -43,6 +43,14 @@ const skills = [...new Set(resources.map((r) => r.skill))];
   <section class="section cream">
     <div class="container">
       <div class="resource-controls">
+        <input
+          id="resourceSearch"
+          class="resource-search"
+          type="search"
+          placeholder="Search by skill, scenario, code or difficulty..."
+          aria-label="Search resources"
+        />
+
         <button class="resource-filter active" data-filter-type="all">All</button>
         <button class="resource-filter" data-filter-type="student">Student Packs</button>
         <button class="resource-filter" data-filter-type="tutor">Tutor Guides</button>
@@ -57,9 +65,17 @@ const skills = [...new Set(resources.map((r) => r.skill))];
         <button class="resource-filter print-resource-list" type="button">Print List</button>
       </div>
 
+      <p class="resource-results-count" aria-live="polite">
+        Showing <strong id="visibleResourceCount">{resources.length}</strong> of <strong>{resources.length}</strong> simulations
+      </p>
+
       <div class="resource-library">
         {resources.map((res) => (
-          <article class="resource-card is-showing" data-skill={res.skill}>
+          <article
+            class="resource-card is-showing"
+            data-skill={res.skill}
+            data-search={`${res.code} ${res.skill} ${res.scenario} ${res.difficulty} ${res.summary}`.toLowerCase()}
+          >
             <div>
               <span class="resource-code">{res.code}</span>
               <p class="eyebrow">{res.skill}</p>
@@ -79,22 +95,35 @@ const skills = [...new Set(resources.map((r) => r.skill))];
           </article>
         ))}
       </div>
+
+      <div class="resource-empty-state" hidden>
+        <h3>No matching resources found</h3>
+        <p>Try searching a different keyword or selecting another skill.</p>
+      </div>
     </div>
   </section>
 
   <script is:inline>
     const filterButtons = document.querySelectorAll(".resource-filter[data-filter-type]");
     const skillFilter = document.querySelector("#skillFilter");
+    const searchInput = document.querySelector("#resourceSearch");
     const cards = document.querySelectorAll(".resource-card");
     const printButton = document.querySelector(".print-resource-list");
+    const visibleCount = document.querySelector("#visibleResourceCount");
+    const emptyState = document.querySelector(".resource-empty-state");
 
     let currentType = "all";
 
     function applyFilters() {
       const currentSkill = skillFilter?.value || "all";
+      const searchTerm = searchInput?.value.trim().toLowerCase() || "";
+      let shownCount = 0;
 
       cards.forEach((card, index) => {
         const matchesSkill = currentSkill === "all" || card.dataset.skill === currentSkill;
+        const matchesSearch = !searchTerm || card.dataset.search.includes(searchTerm);
+
+        const shouldShow = matchesSkill && matchesSearch;
 
         const studentButton = card.querySelector(".student-download");
         const tutorButton = card.querySelector(".tutor-download");
@@ -102,9 +131,10 @@ const skills = [...new Set(resources.map((r) => r.skill))];
         if (studentButton) studentButton.style.display = currentType === "tutor" ? "none" : "inline-flex";
         if (tutorButton) tutorButton.style.display = currentType === "student" ? "none" : "inline-flex";
 
-        if (matchesSkill) {
+        if (shouldShow) {
+          shownCount += 1;
           card.style.display = "flex";
-          card.style.transitionDelay = `${Math.min(index * 35, 280)}ms`;
+          card.style.transitionDelay = `${Math.min(index * 25, 220)}ms`;
 
           requestAnimationFrame(() => {
             card.classList.remove("is-hiding");
@@ -122,6 +152,9 @@ const skills = [...new Set(resources.map((r) => r.skill))];
           }, 350);
         }
       });
+
+      if (visibleCount) visibleCount.textContent = shownCount.toString();
+      if (emptyState) emptyState.hidden = shownCount !== 0;
     }
 
     filterButtons.forEach((button) => {
@@ -134,6 +167,7 @@ const skills = [...new Set(resources.map((r) => r.skill))];
     });
 
     skillFilter?.addEventListener("change", applyFilters);
+    searchInput?.addEventListener("input", applyFilters);
 
     printButton?.addEventListener("click", () => {
       window.print();
