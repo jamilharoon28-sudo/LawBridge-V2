@@ -24,28 +24,24 @@ const dashboard = data?.dashboard ?? {};
           {hero.primaryButtonText && (
             <a class="btn primary" href={hero.primaryButtonLink}>{hero.primaryButtonText}</a>
           )}
-
           {hero.secondaryButtonText && (
             <a class="btn secondary" href={hero.secondaryButtonLink}>{hero.secondaryButtonText}</a>
           )}
-
           {hero.tertiaryButtonText && (
             <a class="btn secondary" href={hero.tertiaryButtonLink}>{hero.tertiaryButtonText}</a>
           )}
         </div>
       </div>
 
-      {dashboard && (
+      {dashboard.heading && (
         <div class="dashboard-card">
-          <span class="pill">{dashboard.label}</span>
-          <h2>{dashboard.heading}</h2>
-          <p>{dashboard.description}</p>
+          {dashboard.label && <span class="pill">{dashboard.label}</span>}
+          {dashboard.heading && <h2>{dashboard.heading}</h2>}
+          {dashboard.description && <p>{dashboard.description}</p>}
 
-          <div class="dashboard-list">
-            {dashboard.items?.map((item) => (
-              <span>{item}</span>
-            ))}
-          </div>
+          {dashboard.items?.map((item) => (
+            <span>{item}</span>
+          ))}
         </div>
       )}
     </div>
@@ -74,7 +70,7 @@ const dashboard = data?.dashboard ?? {};
       <h2>{sections.method?.heading}</h2>
       <p class="section-intro">{sections.method?.description}</p>
 
-      <div class="grid g4">
+      <div class="grid g3">
         {(cards.method ?? []).map((card) => (
           <article class="card">
             <h3>{card.title}</h3>
@@ -113,7 +109,6 @@ const dashboard = data?.dashboard ?? {};
           <article class="card">
             <h3>{card.title}</h3>
             <p>{card.description}</p>
-
             {card.buttonText && (
               <a class="btn secondary" href={card.buttonLink}>{card.buttonText}</a>
             )}
@@ -133,7 +128,6 @@ const dashboard = data?.dashboard ?? {};
         {buttons.cta?.primaryText && (
           <a class="btn primary" href={buttons.cta.primaryLink}>{buttons.cta.primaryText}</a>
         )}
-
         {buttons.cta?.secondaryText && (
           <a class="btn secondary" href={buttons.cta.secondaryLink}>{buttons.cta.secondaryText}</a>
         )}
