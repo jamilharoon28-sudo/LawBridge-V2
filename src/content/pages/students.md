@@ -1,5 +1,8 @@
 ---
-title: "Students"
+title: "Students | LawBridge"
+eyebrow: "Students"
+heading: "Build the practical legal confidence your studies alone may not provide."
+description: "LawBridge helps aspiring lawyers gain practical exposure, commercial awareness, mentor guidance and structured skills development."
 ---
 
-Support for law students, non-law students, graduates and aspiring lawyers preparing for the next stage of their legal journey.
+This page controls the editable Students page hero content.
