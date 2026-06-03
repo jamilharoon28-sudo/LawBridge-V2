@@ -10,9 +10,7 @@ const sections = data?.sections ?? {};
 const buttons = data?.buttons ?? {};
 const dashboard = data?.dashboard ?? {};
 
-// List all resources here (student + tutor)
 const resources = [
-  // Student/Tutor resources
   { code: "CI-01", skill: "Client Interviewing", scenario: "Failed Software Launch", difficulty: "Foundation to Guided Practice", student: "/resources/student/Client Interviewing - Failed Software Launch - Student Pack.docx", tutor: "/resources/tutor/Client Interviewing - Failed Software Launch - Tutor Guide.docx" },
   { code: "CI-02", skill: "Client Interviewing", scenario: "Dismissal After Raising Concern", difficulty: "Foundation to Guided Practice", student: "/resources/student/Client Interviewing - Dismissal After Raising Concern - Student Pack.docx", tutor: "/resources/tutor/Client Interviewing - Dismissal After Raising Concern - Tutor Guide.docx" },
   { code: "AN-01", skill: "Attendance Notes and Legal Analysis", scenario: "Cyberattack After Client Interview", difficulty: "Intermediate", student: "/resources/student/Attendance Notes and Legal Analysis - Cyberattack After Client Interview - Student Pack.docx", tutor: "/resources/tutor/Attendance Notes and Legal Analysis - Cyberattack After Client Interview - Tutor Guide.docx" },
@@ -29,7 +27,7 @@ const resources = [
   { code: "CMA-02", skill: "Case and Matter Analysis", scenario: "Blockchain Payment Dispute", difficulty: "Intermediate to Advanced", student: "/resources/student/Case and Matter Analysis - Blockchain Payment Dispute - Student Pack.docx", tutor: "/resources/tutor/Case and Matter Analysis - Blockchain Payment Dispute - Tutor Guide.docx" }
 ];
 
-const skills = [...new Set(resources.map((resource) => resource.skill))];
+const skills = [...new Set(resources.map((r) => r.skill))];
 ---
 
 <BaseLayout title="Resources | LawBridge">
@@ -66,7 +64,7 @@ const skills = [...new Set(resources.map((resource) => resource.skill))];
               <span class="resource-code">{res.code}</span>
               <p class="eyebrow">{res.skill}</p>
               <h3>{res.scenario}</h3>
-              <p>{res.difficulty}</p>
+              <p class="difficulty-badge">{res.difficulty}</p>
             </div>
 
             <div class="resource-downloads">
@@ -84,52 +82,50 @@ const skills = [...new Set(resources.map((resource) => resource.skill))];
   </section>
 
   <script is:inline>
-  const filterButtons = document.querySelectorAll(".resource-filter");
-  const skillFilter = document.querySelector("#skillFilter");
-  const cards = document.querySelectorAll(".resource-card");
+    const filterButtons = document.querySelectorAll(".resource-filter");
+    const skillFilter = document.querySelector("#skillFilter");
+    const cards = document.querySelectorAll(".resource-card");
 
-  let currentType = "all";
+    let currentType = "all";
 
-  function applyFilters() {
-    const currentSkill = skillFilter?.value || "all";
+    function applyFilters() {
+      const currentSkill = skillFilter?.value || "all";
 
-    cards.forEach((card) => {
-      const matchesSkill = currentSkill === "all" || card.dataset.skill === currentSkill;
+      cards.forEach((card) => {
+        const matchesSkill = currentSkill === "all" || card.dataset.skill === currentSkill;
+        const studentButton = card.querySelector(".student-download");
+        const tutorButton = card.querySelector(".tutor-download");
 
-      const studentButton = card.querySelector(".student-download");
-      const tutorButton = card.querySelector(".tutor-download");
+        if (studentButton) studentButton.style.display = currentType === "tutor" ? "none" : "inline-flex";
+        if (tutorButton) tutorButton.style.display = currentType === "student" ? "none" : "inline-flex";
 
-      if (studentButton) studentButton.style.display = currentType === "tutor" ? "none" : "inline-flex";
-      if (tutorButton) tutorButton.style.display = currentType === "student" ? "none" : "inline-flex";
+        if (matchesSkill) {
+          card.style.display = "flex";
+          requestAnimationFrame(() => {
+            card.classList.remove("is-hiding");
+            card.classList.add("is-showing");
+          });
+        } else {
+          card.classList.remove("is-showing");
+          card.classList.add("is-hiding");
+          setTimeout(() => {
+            card.style.display = "none";
+          }, 350);
+        }
+      });
+    }
 
-      if (matchesSkill) {
-        card.style.display = "flex";
-
-        requestAnimationFrame(() => {
-          card.classList.remove("is-hiding");
-          card.classList.add("is-showing");
-        });
-      } else {
-        card.classList.remove("is-showing");
-        card.classList.add("is-hiding");
-
-        setTimeout(() => {
-          card.style.display = "none";
-        }, 250);
-      }
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        button.classList.add("active");
+        currentType = button.dataset.filterType;
+        applyFilters();
+      });
     });
-  }
 
-  filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      filterButtons.forEach((item) => item.classList.remove("active"));
-      button.classList.add("active");
-      currentType = button.dataset.filterType;
-      applyFilters();
-    });
-  });
+    skillFilter?.addEventListener("change", applyFilters);
 
-  skillFilter?.addEventListener("change", applyFilters);
-
-  applyFilters();
-</script>
+    applyFilters();
+  </script>
+</BaseLayout>
