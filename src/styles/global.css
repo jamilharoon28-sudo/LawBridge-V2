@@ -2202,3 +2202,125 @@ html {
     animation: none;
   }
 }
+/* LAWBRIDGE PREMIUM BACKGROUND MOTION */
+
+/* Hero animated glow orbs */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(8px);
+  animation: lawbridgeOrbFloat 9s ease-in-out infinite;
+}
+
+.hero::before {
+  width: 260px;
+  height: 260px;
+  top: 12%;
+  right: 8%;
+  background: rgba(231, 182, 95, 0.16);
+}
+
+.hero::after {
+  width: 180px;
+  height: 180px;
+  bottom: 10%;
+  left: 6%;
+  background: rgba(255, 255, 255, 0.08);
+  animation-delay: 1.4s;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes lawbridgeOrbFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(18px, -22px, 0) scale(1.08);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Subtle background depth for all main sections */
+.section.cream::before,
+.section.light::before,
+.section.navy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.7;
+  background-image:
+    linear-gradient(rgba(201, 150, 82, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 150, 82, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+
+/* Keep actual section content above background texture */
+.section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* More premium CTA glow */
+.cta-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-panel::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -80px;
+  top: -90px;
+  border-radius: 999px;
+  background: rgba(231, 182, 95, 0.22);
+  filter: blur(6px);
+  animation: lawbridgeOrbFloat 8s ease-in-out infinite;
+}
+
+.cta-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* More premium footer entrance */
+.footer {
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -120px;
+  top: -140px;
+  border-radius: 999px;
+  background: rgba(231, 182, 95, 0.12);
+  pointer-events: none;
+}
+
+/* Reduce motion safety */
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero::after,
+  .cta-panel::before {
+    animation: none !important;
+  }
+}
