@@ -1,5 +1,8 @@
 ---
-title: BUM
+title: "About | LawBridge"
+eyebrow: "About"
+heading: "LawBridge exists to make practical legal development more accessible."
+description: "LawBridge was created to help aspiring lawyers access practical insight, professional guidance and commercial awareness."
 ---
 
-LawBridge helps aspiring lawyers build legal knowledge, confidence and career direction through education, mentoring, workshops and practical development.
+This page controls the editable About page hero content.
