@@ -1196,3 +1196,42 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+.brand-logo {
+  display: block;
+  width: auto;
+  height: 64px;
+  object-fit: contain;
+}
+
+.footer-logo {
+  height: 76px;
+  margin-bottom: 18px;
+}
+
+.header .brand {
+  background: white;
+  border-radius: 18px;
+  padding: 8px 14px;
+}
+
+.footer .brand {
+  display: inline-flex;
+  background: white;
+  border-radius: 18px;
+  padding: 10px 16px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 680px) {
+  .brand-logo {
+    height: 52px;
+  }
+
+  .footer-logo {
+    height: 64px;
+  }
+
+  .header .brand {
+    padding: 6px 10px;
+  }
+}
