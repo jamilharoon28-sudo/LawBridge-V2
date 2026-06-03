@@ -1,1 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
 
+// Mock data: replace with real database/CRM connection later
+const enquiries = [
+  { id: 1, type: "Student", name: "Muhammad Qassim", email: "mqj461@outlook.com", status: "New", date: "2026-06-01" },
+  { id: 2, type: "Mentor", name: "Jane Doe", email: "jane@example.com", status: "Contacted", date: "2026-06-02" },
+  { id: 3, type: "Partner", name: "Acme Law Society", email: "society@acme.com", status: "New", date: "2026-05-30" },
+];
+
+const statuses = ["New", "Contacted", "In Progress", "Closed"];
+---
+
+<BaseLayout title="CRM Dashboard | LawBridge">
+  <section class="hero">
+    <div class="container">
+      <h1>LawBridge CRM Dashboard</h1>
+      <p>Manage all student, mentor, partner, and resource enquiries in one place.</p>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="container">
+      <div class="dashboard-controls">
+        <select id="filterStatus" aria-label="Filter by status">
+          <option value="all">All Statuses</option>
+          {statuses.map((s) => <option value={s}>{s}</option>)}
+        </select>
+        <input type="search" id="searchEnquiries" placeholder="Search by name, email or type..." />
+      </div>
+
+      <div class="dashboard-table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {enquiries.map((e) => (
+              <tr data-status={e.status} data-search={`${e.name.toLowerCase()} ${e.email.toLowerCase()} ${e.type.toLowerCase()}`}>
+                <td>{e.id}</td>
+                <td>{e.type}</td>
+                <td>{e.name}</td>
+                <td>{e.email}</td>
+                <td>{e.status}</td>
+                <td>{e.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    const filterStatus = document.querySelector("#filterStatus");
+    const searchInput = document.querySelector("#searchEnquiries");
+    const rows = document.querySelectorAll(".dashboard-table tbody tr");
+
+    function applyFilters() {
+      const status = filterStatus.value;
+      const searchTerm = searchInput.value.trim().toLowerCase();
+
+      rows.forEach((row) => {
+        const matchesStatus = status === "all" || row.dataset.status === status;
+        const matchesSearch = !searchTerm || row.dataset.search.includes(searchTerm);
+        row.style.display = matchesStatus && matchesSearch ? "table-row" : "none";
+      });
+    }
+
+    filterStatus.addEventListener("change", applyFilters);
+    searchInput.addEventListener("input", applyFilters);
+  </script>
+</BaseLayout>
