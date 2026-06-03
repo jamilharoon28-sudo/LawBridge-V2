@@ -1,17 +1,27 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const pages = await getCollection("pages");
+const studentsPage = pages.find((page) => page.slug === "students");
+
+const title = studentsPage?.data.title ?? "Students | LawBridge";
+const eyebrow = studentsPage?.data.eyebrow ?? "Students";
+const heading =
+  studentsPage?.data.heading ??
+  "Build the practical legal confidence your studies alone may not provide.";
+const description =
+  studentsPage?.data.description ??
+  "LawBridge helps aspiring lawyers gain practical exposure, commercial awareness, mentor guidance and structured skills development.";
 ---
 
-<BaseLayout title="Students | LawBridge">
+<BaseLayout title={title}>
   <section class="page-hero">
     <div class="container page-grid">
       <div>
-        <p class="eyebrow">Students</p>
-        <h1>Build the practical legal confidence your studies alone may not provide.</h1>
-        <p>
-          LawBridge helps aspiring lawyers gain practical exposure, commercial
-          awareness, mentor guidance and structured skills development.
-        </p>
+        <p class="eyebrow">{eyebrow}</p>
+        <h1>{heading}</h1>
+        <p>{description}</p>
 
         <div class="actions">
           <a class="btn primary" href="/contact?tab=student">Join as a Student</a>
