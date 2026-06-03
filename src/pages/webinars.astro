@@ -1,29 +1,139 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection, getEntry } from "astro:content";
 
-const page = await getEntry("pages", "webinars");
+const events = [
+  {
+    title: "Commercial Awareness for Aspiring Lawyers",
+    type: "Webinar",
+    status: "Upcoming",
+    location: "Virtual",
+    description:
+      "Learn how businesses make decisions and how lawyers support commercial objectives.",
+  },
+  {
+    title: "Inside In-House Legal Work",
+    type: "Webinar",
+    status: "Upcoming",
+    location: "Virtual",
+    description:
+      "Understand the role of GCs, in-house counsel and legal teams inside organisations.",
+  },
+  {
+    title: "Application Season Preparation",
+    type: "Webinar",
+    status: "Upcoming",
+    location: "Virtual",
+    description:
+      "Practical preparation for CVs, interviews, assessment centres and applications.",
+  },
+  {
+    title: "Responsible AI in Legal Learning",
+    type: "Webinar",
+    status: "Planned",
+    location: "Virtual",
+    description:
+      "Learn how AI can support learning without replacing judgement.",
+  },
+];
 
-if (!page) {
-  throw new Error("Webinars page content not found.");
-}
-
-const webinars = await getCollection("webinars");
-const { Content } = await page.render();
+const tags = [
+  "Career insights",
+  "Industry panels",
+  "UK legal market",
+  "Commercial awareness",
+  "Practice areas",
+  "In-house legal",
+  "Applications",
+  "Legal technology",
+  "Responsible AI",
+];
 ---
 
-<BaseLayout title={`${page.data.title} | LawBridge`}>
-  <main>
-    <h1>{page.data.title}</h1>
+<BaseLayout title="Webinars | LawBridge">
+  <section class="page-hero">
+    <div class="container page-grid">
+      <div>
+        <p class="eyebrow">Webinars</p>
+        <h1>Legal insight made accessible.</h1>
+        <p>
+          LawBridge webinars give aspiring lawyers access to career insights,
+          commercial awareness, practice-area guidance and practical perspectives.
+        </p>
 
-    <Content />
+        <div class="actions">
+          <a class="btn primary" href="#webinars-list">View Webinars</a>
+          <a class="btn ghost" href="/contact?tab=student">Register Interest</a>
+        </div>
+      </div>
 
-    {webinars.map((webinar) => (
-      <article>
-        <h2>{webinar.data.title}</h2>
-        <p>{webinar.data.date.toLocaleDateString()}</p>
-        <a href={`/webinars/${webinar.slug}`}>View webinar</a>
-      </article>
-    ))}
-  </main>
+      <div class="dashboard mini">
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Career insights</strong>
+          <span>Learn from practical legal perspectives.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Commercial awareness</strong>
+          <span>Understand legal work in business context.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Practice areas</strong>
+          <span>Explore different routes into legal work.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cream" id="webinars-list">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Upcoming webinars</p>
+        <h2>Accessible insights from the legal profession.</h2>
+        <p>
+          Each webinar card can later be managed by CMS.
+        </p>
+      </div>
+
+      <div class="grid g4">
+        {events.map((event) => (
+          <article class="event">
+            <span class="pill">{event.type}</span>
+            <h3>{event.title}</h3>
+            <p>{event.description}</p>
+            <div class="meta">
+              <span>{event.status}</span>
+              <span>{event.location}</span>
+            </div>
+            <a class="link" href="/contact?tab=student">Register interest</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section navy overlap">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Why attend</p>
+        <h2>Learn directly from practical legal perspectives.</h2>
+        <p>
+          Webinars help students understand the profession beyond textbooks,
+          applications and generic career advice.
+        </p>
+      </div>
+
+      <div class="tags">
+        {tags.map((tag) => (
+          <span>{tag}</span>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
