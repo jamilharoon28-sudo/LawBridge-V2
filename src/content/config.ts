@@ -3,77 +3,72 @@ import { defineCollection, z } from "astro:content";
 const pages = defineCollection({
   type: "content",
   schema: z.object({
-    title: z.string()
-  })
+    title: z.string(),
+    eyebrow: z.string().optional(),
+    heading: z.string().optional(),
+    description: z.string().optional(),
+
+    hero: z
+      .object({
+        eyebrow: z.string().optional(),
+        heading: z.string().optional(),
+        description: z.string().optional(),
+        primaryButtonText: z.string().optional(),
+        primaryButtonLink: z.string().optional(),
+        secondaryButtonText: z.string().optional(),
+        secondaryButtonLink: z.string().optional(),
+        tertiaryButtonText: z.string().optional(),
+        tertiaryButtonLink: z.string().optional(),
+      })
+      .optional(),
+
+    sections: z.any().optional(),
+    cards: z.any().optional(),
+    buttons: z.any().optional(),
+  }),
 });
 
 const blog = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    date: z.date(),
-    excerpt: z.string()
-  })
+    description: z.string().optional(),
+    date: z.coerce.date().optional(),
+    category: z.string().optional(),
+    author: z.string().optional(),
+  }),
 });
 
 const webinars = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    date: z.date()
-  })
+    description: z.string().optional(),
+    date: z.coerce.date().optional(),
+    status: z.string().optional(),
+    location: z.string().optional(),
+  }),
 });
 
 const workshops = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    date: z.date()
-  })
+    description: z.string().optional(),
+    date: z.coerce.date().optional(),
+    status: z.string().optional(),
+    location: z.string().optional(),
+  }),
 });
 
 const resources = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    type: z.string()
-  })
-});
-
-const mentors = defineCollection({
-  type: "content",
-  schema: z.object({
-    name: z.string(),
-    role: z.string(),
-    organisation: z.string().optional()
-  })
-});
-
-const testimonials = defineCollection({
-  type: "content",
-  schema: z.object({
-    name: z.string(),
-    role: z.string().optional()
-  })
-});
-
-const settings = defineCollection({
-  type: "content",
-  schema: z.object({
-    siteName: z.string().optional(),
-    tagline: z.string().optional(),
-    contactEmail: z.string().optional(),
-    copyright: z.string().optional(),
-    linkedin: z.string().optional(),
-    instagram: z.string().optional(),
-    youtube: z.string().optional(),
-    links: z.array(
-      z.object({
-        label: z.string(),
-        url: z.string()
-      })
-    ).optional()
-  })
+    description: z.string().optional(),
+    category: z.string().optional(),
+    type: z.string().optional(),
+  }),
 });
 
 export const collections = {
@@ -82,7 +77,4 @@ export const collections = {
   webinars,
   workshops,
   resources,
-  mentors,
-  testimonials,
-  settings
 };
