@@ -2507,3 +2507,34 @@ html {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* LAWBRIDGE RESOURCE FILTER MOTION */
+
+.resource-card {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.resource-card.is-hiding {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  pointer-events: none;
+}
+
+.resource-card.is-showing {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.resource-filter:hover,
+#skillFilter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(4, 27, 50, 0.12);
+}
+
+.resource-filter.active:hover {
+  box-shadow: 0 18px 42px rgba(201, 150, 82, 0.3);
+}
