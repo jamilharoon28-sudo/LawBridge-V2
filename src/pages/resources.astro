@@ -84,32 +84,52 @@ const skills = [...new Set(resources.map((resource) => resource.skill))];
   </section>
 
   <script is:inline>
-    const filterButtons = document.querySelectorAll(".resource-filter");
-    const skillFilter = document.querySelector("#skillFilter");
-    const cards = document.querySelectorAll(".resource-card");
-    let currentType = "all";
+  const filterButtons = document.querySelectorAll(".resource-filter");
+  const skillFilter = document.querySelector("#skillFilter");
+  const cards = document.querySelectorAll(".resource-card");
 
-    function applyFilters() {
-      const currentSkill = skillFilter?.value || "all";
-      cards.forEach((card) => {
-        const matchesSkill = currentSkill === "all" || card.dataset.skill === currentSkill;
-        const studentButton = card.querySelector(".student-download");
-        const tutorButton = card.querySelector(".tutor-download");
-        if (studentButton) studentButton.style.display = currentType === "tutor" ? "none" : "inline-flex";
-        if (tutorButton) tutorButton.style.display = currentType === "student" ? "none" : "inline-flex";
-        card.style.display = matchesSkill ? "flex" : "none";
-      });
-    }
+  let currentType = "all";
 
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        filterButtons.forEach((b) => b.classList.remove("active"));
-        button.classList.add("active");
-        currentType = button.dataset.filterType;
-        applyFilters();
-      });
+  function applyFilters() {
+    const currentSkill = skillFilter?.value || "all";
+
+    cards.forEach((card) => {
+      const matchesSkill = currentSkill === "all" || card.dataset.skill === currentSkill;
+
+      const studentButton = card.querySelector(".student-download");
+      const tutorButton = card.querySelector(".tutor-download");
+
+      if (studentButton) studentButton.style.display = currentType === "tutor" ? "none" : "inline-flex";
+      if (tutorButton) tutorButton.style.display = currentType === "student" ? "none" : "inline-flex";
+
+      if (matchesSkill) {
+        card.style.display = "flex";
+
+        requestAnimationFrame(() => {
+          card.classList.remove("is-hiding");
+          card.classList.add("is-showing");
+        });
+      } else {
+        card.classList.remove("is-showing");
+        card.classList.add("is-hiding");
+
+        setTimeout(() => {
+          card.style.display = "none";
+        }, 250);
+      }
     });
+  }
 
-    skillFilter?.addEventListener("change", applyFilters);
-  </script>
-</BaseLayout>
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      filterButtons.forEach((item) => item.classList.remove("active"));
+      button.classList.add("active");
+      currentType = button.dataset.filterType;
+      applyFilters();
+    });
+  });
+
+  skillFilter?.addEventListener("change", applyFilters);
+
+  applyFilters();
+</script>
