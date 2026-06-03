@@ -13,12 +13,15 @@ collections:
     slug: "{{slug}}"
 
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - label: "Page Title"
+        name: "title"
+        widget: "string"
 
       - label: "Hero"
         name: "hero"
         widget: "object"
         required: false
+        collapsed: false
         fields:
           - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
           - { label: "Heading", name: "heading", widget: "string", required: false }
@@ -30,10 +33,29 @@ collections:
           - { label: "Tertiary Button Text", name: "tertiaryButtonText", widget: "string", required: false }
           - { label: "Tertiary Button Link", name: "tertiaryButtonLink", widget: "string", required: false }
 
+      - label: "Dashboard Card"
+        name: "dashboard"
+        widget: "object"
+        required: false
+        collapsed: false
+        fields:
+          - { label: "Label", name: "label", widget: "string", required: false }
+          - { label: "Heading", name: "heading", widget: "string", required: false }
+          - { label: "Description", name: "description", widget: "text", required: false }
+          - label: "Dashboard Items"
+            name: "items"
+            widget: "list"
+            required: false
+            field:
+              label: "Item"
+              name: "item"
+              widget: "string"
+
       - label: "Sections"
         name: "sections"
         widget: "object"
         required: false
+        collapsed: false
         fields:
           - label: "Problem Section"
             name: "problem"
@@ -84,6 +106,7 @@ collections:
         name: "cards"
         widget: "object"
         required: false
+        collapsed: false
         fields:
           - label: "Problem Cards"
             name: "problem"
@@ -123,6 +146,7 @@ collections:
         name: "buttons"
         widget: "object"
         required: false
+        collapsed: false
         fields:
           - label: "CTA"
             name: "cta"
@@ -133,6 +157,11 @@ collections:
               - { label: "Primary Link", name: "primaryLink", widget: "string", required: false }
               - { label: "Secondary Text", name: "secondaryText", widget: "string", required: false }
               - { label: "Secondary Link", name: "secondaryLink", widget: "string", required: false }
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: false
 
   - name: "blog"
     label: "Blog Posts"
@@ -158,6 +187,7 @@ collections:
       - { label: "Date", name: "date", widget: "datetime", required: false }
       - { label: "Status", name: "status", widget: "string", required: false }
       - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "workshops"
     label: "Workshops"
@@ -170,9 +200,10 @@ collections:
       - { label: "Date", name: "date", widget: "datetime", required: false }
       - { label: "Status", name: "status", widget: "string", required: false }
       - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: "resources"
-    label: "Resources"
+    label: "Resource Entries"
     folder: "src/content/resources"
     create: true
     slug: "{{slug}}"
@@ -181,3 +212,7 @@ collections:
       - { label: "Description", name: "description", widget: "text", required: false }
       - { label: "Category", name: "category", widget: "string", required: false }
       - { label: "Type", name: "type", widget: "string", required: false }
+      - { label: "Skill", name: "skill", widget: "string", required: false }
+      - { label: "Difficulty", name: "difficulty", widget: "string", required: false }
+      - { label: "Download Link", name: "downloadLink", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
