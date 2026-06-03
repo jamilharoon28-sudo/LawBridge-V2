@@ -1,9 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 
-const pages = await getCollection("pages");
-const homePage = pages.find((page) => page.slug === "home");
+const homePage = await getEntry("pages", "home");
 
 const title = homePage?.data.title ?? "LawBridge | Practical Legal Development";
 const eyebrow =
