@@ -1,5 +1,5 @@
 ---
-title: Bum | LawBridge
+title: About | LawBridge
 eyebrow: About
 heading: LawBridge exists to make practical legal development more accessible.
 description: LawBridge was created to help aspiring lawyers access practical
