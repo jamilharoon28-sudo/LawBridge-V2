@@ -1,0 +1,271 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Private LawBridge admin dashboard.
+// The buttons now open the real Decap CMS editors instead of fake /admin/edit routes.
+const pages = [
+  {
+    id: "home",
+    title: "Homepage",
+    editableFields: ["hero", "sections", "buttons", "dashboard"],
+    editPath: "/cms/#/collections/pages/entries/home",
+    previewPath: "/",
+  },
+  {
+    id: "about",
+    title: "About",
+    editableFields: ["heading", "description", "team", "values"],
+    editPath: "/cms/#/collections/pages/entries/about",
+    previewPath: "/about",
+  },
+  {
+    id: "students",
+    title: "Students",
+    editableFields: ["hero", "curriculum", "resources"],
+    editPath: "/cms/#/collections/pages/entries/students",
+    previewPath: "/students",
+  },
+  {
+    id: "mentors",
+    title: "Mentors",
+    editableFields: ["hero", "mentorship", "testimonials"],
+    editPath: "/cms/#/collections/pages/entries/mentors",
+    previewPath: "/mentors",
+  },
+  {
+    id: "resources",
+    title: "Resources Page",
+    editableFields: ["hero", "filters", "downloads"],
+    editPath: "/cms/#/collections/pages/entries/resources",
+    previewPath: "/resources",
+  },
+  {
+    id: "blog",
+    title: "Blog Page",
+    editableFields: ["intro", "featured", "categories"],
+    editPath: "/cms/#/collections/pages/entries/blog",
+    previewPath: "/blog",
+  },
+  {
+    id: "workshops",
+    title: "Workshops Page",
+    editableFields: ["hero", "upcoming", "details"],
+    editPath: "/cms/#/collections/pages/entries/workshops",
+    previewPath: "/workshops",
+  },
+  {
+    id: "webinars",
+    title: "Webinars Page",
+    editableFields: ["hero", "upcoming", "speakers"],
+    editPath: "/cms/#/collections/pages/entries/webinars",
+    previewPath: "/webinars",
+  },
+];
+
+const collections = [
+  {
+    title: "Blog Posts",
+    description: "Create and edit LawBridge blog articles.",
+    editPath: "/cms/#/collections/blog",
+    previewPath: "/blog",
+  },
+  {
+    title: "Webinars",
+    description: "Create and edit webinar entries.",
+    editPath: "/cms/#/collections/webinars",
+    previewPath: "/webinars",
+  },
+  {
+    title: "Workshops",
+    description: "Create and edit workshop entries.",
+    editPath: "/cms/#/collections/workshops",
+    previewPath: "/workshops",
+  },
+  {
+    title: "Resource Entries",
+    description: "Create and edit downloadable resource cards.",
+    editPath: "/cms/#/collections/resources",
+    previewPath: "/resources",
+  },
+];
+---
+
+<BaseLayout title="LawBridge Admin Panel">
+  <section class="section cream">
+    <div class="container">
+      <h1>LawBridge Admin Panel</h1>
+      <p>Manage editable LawBridge pages and content collections from one simple dashboard.</p>
+
+      <div class="admin-auth-panel">
+        <span id="admin-status">Checking admin access...</span>
+        <button id="admin-logout" class="btn secondary" type="button">Log out</button>
+      </div>
+
+      <h2 class="admin-section-heading">Pages</h2>
+      <div class="admin-page-cards">
+        {pages.map((page) => (
+          <article class="admin-card">
+            <h2>{page.title}</h2>
+            <p>Editable fields: {page.editableFields.join(", ")}</p>
+            <div class="admin-actions">
+              <a class="btn primary" href={page.editPath}>Edit {page.title}</a>
+              <a class="btn secondary" href={page.previewPath} target="_blank">Preview {page.title}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <h2 class="admin-section-heading">Collections</h2>
+      <div class="admin-page-cards">
+        {collections.map((collection) => (
+          <article class="admin-card">
+            <h2>{collection.title}</h2>
+            <p>{collection.description}</p>
+            <div class="admin-actions">
+              <a class="btn primary" href={collection.editPath}>Manage {collection.title}</a>
+              <a class="btn secondary" href={collection.previewPath} target="_blank">Preview</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style is:inline>
+    .admin-auth-panel {
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(201, 150, 82, 0.24);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 14px 40px rgba(4, 27, 50, 0.08);
+    }
+
+    .admin-section-heading {
+      margin-top: 2.4rem;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #041b32;
+    }
+
+    .admin-page-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .admin-card {
+      padding: 1.5rem;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #ffffff, #fdfaf4);
+      border: 1px solid rgba(201, 150, 82, 0.24);
+      box-shadow: 0 22px 60px rgba(4, 27, 50, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .admin-card h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      color: #041b32;
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-card p {
+      color: #334155;
+      font-size: 0.95rem;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .admin-actions a,
+    .admin-auth-panel button {
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: all 0.25s ease;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .admin-actions .btn.primary {
+      background: linear-gradient(135deg, #e7b65f, #c99652);
+      color: #041b32;
+    }
+
+    .admin-actions .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 34px rgba(201, 150, 82, 0.28);
+    }
+
+    .admin-actions .btn.secondary,
+    .admin-auth-panel .btn.secondary {
+      background: #ffffff;
+      border: 1px solid rgba(201, 150, 82, 0.28);
+      color: #041b32;
+    }
+
+    .admin-actions .btn.secondary:hover,
+    .admin-auth-panel .btn.secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(4, 27, 50, 0.12);
+    }
+
+    @media (max-width: 900px) {
+      .admin-page-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-auth-panel {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    const adminStatus = document.getElementById("admin-status");
+    const logoutButton = document.getElementById("admin-logout");
+
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", (user) => {
+        if (!user) {
+          window.location.href = "/login/";
+          return;
+        }
+
+        const roles = user.app_metadata?.roles || [];
+
+        if (!roles.includes("admin")) {
+          if (adminStatus) {
+            adminStatus.textContent = "You are signed in, but this account does not have the admin role.";
+          }
+          return;
+        }
+
+        if (adminStatus) {
+          adminStatus.textContent = `Signed in as ${user.email}`;
+        }
+      });
+
+      if (logoutButton) {
+        logoutButton.addEventListener("click", () => {
+          window.netlifyIdentity.logout();
+          window.location.href = "/login/";
+        });
+      }
+    }
+  </script>
+</BaseLayout>
