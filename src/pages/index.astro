@@ -1,20 +1,65 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getEntry } from "astro:content";
-
-const settings = await getEntry("settings", "general");
-
-if (!settings) {
-  throw new Error("General settings not found.");
-}
-
-const siteName = settings.data.siteName;
-const tagline = settings.data.tagline;
 ---
 
-<BaseLayout title={siteName}>
-  <main>
-    <h1>{siteName}</h1>
-    <p>{tagline}</p>
-  </main>
+<BaseLayout title="LawBridge | Practical Legal Development">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Practical legal development</p>
+        <h1>Build the confidence, skills and direction to move forward in law.</h1>
+        <p>
+          LawBridge helps aspiring lawyers develop legal knowledge, career confidence,
+          practical skills and professional awareness through structured learning,
+          mentoring, workshops and resources.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="/students">Start as a Student</a>
+          <a class="btn ghost" href="/mentors">Become a Mentor</a>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="dash-top">
+          <div>
+            <p class="eyebrow">LawBridge Pathway</p>
+            <strong>Learn. Practise. Connect. Progress.</strong>
+          </div>
+        </div>
+
+        <div class="skill-list">
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Legal skills</span>
+              <small>85%</small>
+            </div>
+            <div class="bar"><span style="width:85%"></span></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Commercial awareness</span>
+              <small>75%</small>
+            </div>
+            <div class="bar"><span style="width:75%"></span></div>
+          </div>
+
+          <div class="skill-row">
+            <div class="skill-top">
+              <span>Career confidence</span>
+              <small>90%</small>
+            </div>
+            <div class="bar"><span style="width:90%"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
